@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f6f8;
+}
+
+.page {
+  padding: 24px;
+}
