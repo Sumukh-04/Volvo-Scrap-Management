@@ -1,3 +1,5 @@
+
+import filterIcon from "../../assets/image assets/filter.png"
 export default function FilterBar() {
   return (
     <div className="filter-row">
@@ -27,8 +29,9 @@ export default function FilterBar() {
           </select>
         </div>
 
-        <button className="btn btn-outline">
-          Filter
+        <button className="btn-filter">
+        <img src={filterIcon} className="filter-icon" alt="" />
+        Filter
         </button>
 
       </div>

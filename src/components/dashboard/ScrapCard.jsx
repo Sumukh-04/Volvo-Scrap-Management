@@ -1,5 +1,5 @@
-import editIcon from "../assets/penciledit.png"
-import scrapIcon from "../assets/scrap_icon.png"
+import editIcon from "../../assets/image assets/penciledit.png"
+import scrapIcon from "../../assets/image assets/scrap_icon.png"
 import StatusBadge from "./StatusBadge"
 
 export default function ScrapCard({ item }) {
@@ -26,8 +26,6 @@ export default function ScrapCard({ item }) {
         <StatusBadge status={item.status} />
 
       </div>
-
-      <div className="card-divider"></div>
 
       <div className="card-actions">
 

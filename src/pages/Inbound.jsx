@@ -1,37 +1,32 @@
-import syncIcon from "../assets/sync.png"
-import TopBar from "../components/TopBar"
-import StatsRow from "../components/StatsRow"
-import FilterBar from "../components/FilterBar"
-import ScrapGrid from "../components/ScrapGrid"
+import syncIcon from "../assets/image assets/sync.png"
+import AppLayout from "../layouts/AppLayout"
+import StatsRow from "../components/dashboard/StatsRow"
+import FilterBar from "../components/dashboard/FilterBar"
+import ScrapGrid from "../components/dashboard/ScrapGrid"
 
 export default function Inbound() {
-
   return (
-    <>
-      <TopBar />
+    <AppLayout
+      header={
+        <>
+          <div className="flex-between">
+            <h2 className="page-title">Sentry Dashboard</h2>
 
-      <div className="sticky-section">
+            <button className="btn btn-outline sync-btn">
+              <img
+                src={syncIcon}
+                alt="Sync"
+                className="sync-icon"
+              />
+            </button>
+          </div>
 
-        <div className="flex-between">
-          <h2 className="page-title">Sentry Dashboard</h2>
-
-          <button className="btn btn-outline sync-btn">
-            <img
-              src={syncIcon}
-              alt="Sync"
-              className="sync-icon"
-            />
-          </button>
-        </div>
-
-        <StatsRow />
-        <FilterBar />
-      </div>
-
-      <div className="scroll-area">
-        <ScrapGrid />
-      </div>
-    </>
+          <StatsRow />
+          <FilterBar />
+        </>
+      }
+    >
+      <ScrapGrid />
+    </AppLayout>
   )
 }
-

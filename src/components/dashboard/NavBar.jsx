@@ -1,9 +1,9 @@
-import logo from "../assets/volvo_logo.png"
-import avatarImg from "../assets/account_icon.png"
+import logo from "../../assets/image assets/volvo_logo.png"
+import avatarImg from "../../assets/image assets/account_icon.png"
 
-export default function TopBar() {
+export default function NavBar() {
   return (
-    <div className="topbar">
+    <div className="navbar">
 
       <img 
         src={logo} 
