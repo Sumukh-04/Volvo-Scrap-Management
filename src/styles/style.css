@@ -361,7 +361,6 @@ body {
 
 .scrap-card {
   background: white;
-  min-height: 140px;
   padding: 16px 18px;
   box-shadow: var(--shadow-md);
   display: flex;
@@ -412,8 +411,7 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   border-bottom: 2px solid #EAEAEA;
-  padding-bottom: 8px;
-  margin-bottom: 6px;
+  padding-bottom: 12px;
 }
 
 .scrap-left {
