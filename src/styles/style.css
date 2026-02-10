@@ -225,9 +225,38 @@ body {
 .input {
   padding: 8px 10px;
   border: 1px solid #ccc;
-  font-size: var(--text-md);
   background: white;
   width: 160px;
+  border-radius: var(--radius-sm);
+}
+
+select.input {
+  font-size: var(--text-sm);  
+  font-weight: 400;
+  color: #AAAAAA;    
+  border-radius: var(--radius-sm);       
+}
+
+select.input:has(option:checked:not([value=""])) {
+  color: #000;
+  font-weight: 400;
+}
+
+
+.sort-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sort-group select.input {
+  width: 95px; 
+  height: 30px;                  
+}
+
+.sort-label {
+  font-size: var(--text-sm);
+  font-weight: 400;
 }
 
 .stats-row{
@@ -296,17 +325,31 @@ body {
   justify-content: space-between;
 }
 
+.filter-title{
+  font-weight: 500;
+}
+
+.filter-controls{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: var(--text-sm);
+  font-weight: 300;
+}
+
 .btn-filter {
   display: flex;
   align-items: center;
   gap: 6px;
-
+  height: 32px;
+  padding: 0 12px;
   border: 1px solid var(--primary-dark);
   background: white;
   padding: 8px 12px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: var(--text-md);
+  font-weight: 500;
 }
 
 .filter-icon {

@@ -10,11 +10,12 @@ export default function ScrapCard({ item }) {
 
         <div className="scrap-left">
           <img src={scrapIcon} className="scrap-img" />
-
           <div>
             <div className="scrap-title">
               {item.type} - {item.weight}kg
-              <img src={editIcon} className="edit-icon" />
+              {(item.status === "Pending" || item.status === "Overdue") && (
+                <img src={editIcon} className="edit-icon" alt="Edit" />
+              )}
             </div>
 
             <div className="scrap-meta">
