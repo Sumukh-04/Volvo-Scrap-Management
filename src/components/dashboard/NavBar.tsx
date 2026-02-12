@@ -30,7 +30,11 @@ const [showLog, setShowLog] = useState(false);
 
         <div>
           <div className="name">Leonardo Lian</div>
+<<<<<<< HEAD
           <div className="role">Environmental engineer</div>
+=======
+          <div className="role">Sentry</div>
+>>>>>>> f3da32c7d69249df4bef6617bc0b1898c1679b6b
         </div>
          <img
                         src={DownArrow}

@@ -1,7 +1,7 @@
 import ScrapCard from "./ScrapCard"
-import ScrapItem  from "./ScrapCard"
+import type { ScrapItem } from "./ScrapCard"
 
-const data: ScrapItem = [
+const data: ScrapItem[] = [
   { id:1, type:"Aluminum", weight:1, status:"Pending", time:"3-02-2026 00:00" },
   { id:2, type:"Plastic", weight:1, status:"Pending", time:"3-02-2026 00:00" },
   { id:3, type:"Magnesium", weight:1, status:"Pending", time:"3-02-2026 00:00" },
