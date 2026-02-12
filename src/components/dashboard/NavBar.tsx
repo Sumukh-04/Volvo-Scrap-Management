@@ -1,7 +1,15 @@
 import logo from "../../assets/image-assets/volvo_logo.png"
 import avatarImg from "../../assets/image-assets/account_icon.png"
+import {useState} from "react";
+import DownArrow from "../../assets/image-assets/Down Arrow.png"
+
+
 
 export default function NavBar() {
+
+const [showLog, setShowLog] = useState(false);
+
+
   return (
     <div className="navbar">
 
@@ -21,9 +29,20 @@ export default function NavBar() {
         </div>
 
         <div>
-          <div className="name">Sumukh Umesh</div>
-          <div className="role">Sentry</div>
+          <div className="name">Leonardo Lian</div>
+          <div className="role">Environmental engineer</div>
         </div>
+         <img
+                        src={DownArrow}
+                        alt="dropdown"
+                        className="dropdown-arrow"
+                        onClick={()=> setShowLog(!showLog)}
+                        />
+                        {showLog &&(
+                            <div className="logout-menu">
+                                <p onClick ={()=> console.log("logout-clicked")}>Logout</p>
+                                </div>
+                        )}
       </div>
 
     </div>

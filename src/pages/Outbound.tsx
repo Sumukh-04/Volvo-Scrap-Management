@@ -4,13 +4,13 @@ import StatsRow from "../components/dashboard/StatsRow"
 import FilterBar from "../components/dashboard/FilterBar"
 import ScrapGrid from "../components/dashboard/ScrapGrid"
 
-export default function Inbound() {
+export default function Outbound() {
   return (
     <AppLayout
       header={
         <>
           <div className="flex-between">
-            <h2 className="page-title">Sentry Dashboard</h2>
+            <h2 className="page-title">Egress Dashboard</h2>
 
             <button className="btn btn-outline sync-btn">
               <img
@@ -22,11 +22,10 @@ export default function Inbound() {
           </div>
 
           <StatsRow />
-          <FilterBar mode="inbound" />
+          <FilterBar mode="outbound" />
         </>
       }
     >
-      <ScrapGrid />
     </AppLayout>
   )
 }
