@@ -1,8 +1,20 @@
-import editIcon from "../../assets/image assets/penciledit.png"
-import scrapIcon from "../../assets/image assets/scrap_icon.png"
+import editIcon from "../../assets/image-assets/penciledit.png"
+import scrapIcon from "../../assets/image-assets/scrap_icon.png"
 import StatusBadge from "./StatusBadge"
 
-export default function ScrapCard({ item }) {
+type ScrapItem = {
+  id: number
+  type: string
+  weight: number
+  status: "Pending" | "Approved" | "Rejected" | "Overdue"
+  time: string
+}
+
+type ScrapCardProps = {
+  item: ScrapItem
+}
+
+export default function ScrapCard({ item }: ScrapCardProps) {
   return (
     <div className="scrap-card">
 

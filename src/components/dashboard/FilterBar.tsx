@@ -1,5 +1,5 @@
 
-import filterIcon from "../../assets/image assets/filter.png"
+import filterIcon from "../../assets/image-assets/filter.png"
 export default function FilterBar() {
   return (
     <div className="filter-row">

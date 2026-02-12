@@ -1,4 +1,4 @@
-import syncIcon from "../assets/image assets/sync.png"
+import syncIcon from "../assets/image-assets/sync.png"
 import AppLayout from "../layouts/AppLayout"
 import StatsRow from "../components/dashboard/StatsRow"
 import FilterBar from "../components/dashboard/FilterBar"

@@ -1,5 +1,5 @@
-import logo from "../../assets/image assets/volvo_logo.png"
-import avatarImg from "../../assets/image assets/account_icon.png"
+import logo from "../../assets/image-assets/volvo_logo.png"
+import avatarImg from "../../assets/image-assets/account_icon.png"
 
 export default function NavBar() {
   return (
