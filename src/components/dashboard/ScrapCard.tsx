@@ -2,7 +2,7 @@ import editIcon from "../../assets/image-assets/penciledit.png"
 import scrapIcon from "../../assets/image-assets/scrap_icon.png"
 import StatusBadge from "./StatusBadge"
 
-type ScrapItem = {
+export type ScrapItem = {
   id: number
   type: string
   weight: number

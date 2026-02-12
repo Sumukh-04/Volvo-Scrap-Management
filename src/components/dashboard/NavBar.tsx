@@ -21,7 +21,7 @@ export default function NavBar() {
         </div>
 
         <div>
-          <div className="name">Sumukh Umesh</div>
+          <div className="name">Leonardo Lian</div>
           <div className="role">Sentry</div>
         </div>
       </div>
