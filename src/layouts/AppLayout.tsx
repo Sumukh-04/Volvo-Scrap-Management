@@ -1,6 +1,15 @@
+import { ReactNode } from "react"
 import NavBar from "../components/dashboard/NavBar"
 
-export default function AppLayout({ header, children }) {
+type AppLayoutProps = {
+  header?: ReactNode
+  children: ReactNode
+}
+
+export default function AppLayout({
+  header,
+  children,
+}: AppLayoutProps){
   return (
     <div className="app-shell">
       {/* Global navbar */}
@@ -25,5 +34,3 @@ export default function AppLayout({ header, children }) {
     </div>
   )
 }
-
-
