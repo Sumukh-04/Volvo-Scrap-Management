@@ -39,6 +39,12 @@
   --layout-padding-y: 10px;
 }
 
+@media (max-width: 768px) {
+  :root {
+    --layout-padding-x: 20px;
+  }
+}
+
 @font-face {
   font-family: "Volvo Novum";
   src: url("../assets/font/VolvoNovum_Light.ttf") format("truetype");
@@ -86,11 +92,12 @@ textarea {
   padding: var(--layout-padding-y) var(--layout-padding-x);
   display: flex;
   flex-direction: column;
-  gap: var(--layout-padding-y);
+  gap: 10px;
 }
 
 .page-main {
   padding: var(--layout-padding-y) var(--layout-padding-x);
+  padding-bottom: 20px;
 }
 
 .page-footer {
@@ -125,7 +132,7 @@ body {
   z-index: 1000;
   background: linear-gradient(90deg, var(--primary-mid), var(--primary-dark));
   color: white;
-  padding: 10px 50px 10px;
+  padding: 10px var(--layout-padding-x) 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -336,7 +343,7 @@ select.input:has(option:checked:not([value=""])) {
 .filter-controls {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 20px;
   white-space: nowrap;
 }
 
@@ -481,11 +488,11 @@ select.input:has(option:checked:not([value=""])) {
   display: flex;
   align-items: center;
   gap: 6px;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
   line-height: 1.2;
+  word-break: break-word;
 }
 
 .scrap-meta {
@@ -500,8 +507,9 @@ select.input:has(option:checked:not([value=""])) {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  border-bottom: 2px solid #eaeaea;
   padding-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .scrap-left {
@@ -516,15 +524,27 @@ select.input:has(option:checked:not([value=""])) {
   gap: 10px;
   flex-wrap: wrap;
   margin-top: auto;
+  border-top: 2px solid #eaeaea;
+  padding-top: 20px;
 }
 
 .card-actions .btn {
   font-weight: 500;
 }
-@media (max-width: 768px) {
-  .scrap-grid {
-    grid-template-columns: 1fr;
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+  .scrap-meta {
+    font-size: 13px;
+    color: #777;
+    margin-top: 6px;
+    font-weight: 400;
+    line-height: 1.1;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
   }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
   .scrap-meta {
     font-size: 13px;
     color: #777;
@@ -542,20 +562,10 @@ select.input:has(option:checked:not([value=""])) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-
-@media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
-  .scrap-meta {
-    font-size: 13px;
-    color: #777;
-    margin-top: 6px;
-    font-weight: 400;
-    line-height: 1.1;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 10px !important;
+@media (max-width: 768px) {
+  .scrap-grid {
+    grid-template-columns: 1fr;
   }
-}
-@media only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
   .scrap-meta {
     font-size: 13px;
     color: #777;
