@@ -22,7 +22,7 @@ export default function Inbound() {
           </div>
 
           <StatsRow />
-          <FilterBar mode="inbound" />
+          <FilterBar mode="inbound"/>
         </>
       }
     >

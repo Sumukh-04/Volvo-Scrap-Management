@@ -28,10 +28,10 @@ const [showLog, setShowLog] = useState(false);
           />
         </div>
 
-        <div>
-          <div className="name">Leonardo Lian</div>
-          <div className="role">Environmental engineer</div>
-        </div>
+                  <div>
+                    <div className="name">Leonardo Lian</div>
+                    <div className="role">Environmental engineer</div>
+                  </div>
          <img
                         src={DownArrow}
                         alt="dropdown"
