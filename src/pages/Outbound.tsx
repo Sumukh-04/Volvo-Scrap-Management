@@ -2,7 +2,7 @@ import syncIcon from "../assets/image-assets/sync.png"
 import AppLayout from "../layouts/AppLayout"
 import StatsRow from "../components/dashboard/StatsRow"
 import FilterBar from "../components/dashboard/FilterBar"
-import ScrapGrid from "../components/dashboard/ScrapGrid"
+import  OutboundGrid  from "../components/dashboard/GridData/OutboundGrid"
 
 export default function Outbound() {
   return (
@@ -26,6 +26,7 @@ export default function Outbound() {
         </>
       }
     >
+      <OutboundGrid/>
     </AppLayout>
   )
 }

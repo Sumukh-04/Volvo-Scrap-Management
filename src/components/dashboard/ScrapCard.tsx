@@ -1,60 +1,128 @@
-import editIcon from "../../assets/image-assets/penciledit.png"
-import scrapIcon from "../../assets/image-assets/scrap_icon.png"
-import StatusBadge from "./StatusBadge"
+import editIcon from "../../assets/image-assets/penciledit.png";
+import scrapIcon from "../../assets/image-assets/scrap_icon.png";
+import Approvedstat from "../../assets/image-assets/stats-approval_img.png";
+import StatusBadge from "./StatusBadge";
+
+export type ScrapStatus =
+  | "Pending"
+  | "Approved"
+  | "Rejected"
+  | "Overdue"
+  | "Draft"
+  | "Sent For Approval"
+  | "Resubmitted";
 
 export type ScrapItem = {
-  id: number
-  type: string
-  weight: number
-  status: "Pending" | "Approved" | "Rejected" | "Overdue"
-  time: string
-}
+  id: number | string;
+  type: string;
+  weight: number | string;
+  status: ScrapStatus;
+  time?: string;
+  date?: string;
+  approval?: string;
+  note?: string;
+  icon?: string;
+};
 
 type ScrapCardProps = {
-  item: ScrapItem
-}
+  item: ScrapItem;
+  mode?: "inbound" | "outbound";
+};
 
-export default function ScrapCard({ item }: ScrapCardProps) {
+export default function ScrapCard({
+  item,
+  mode = "inbound",
+}: ScrapCardProps) {
+  const statusClass = item.status
+    .toLowerCase()
+    .replace(/\s/g, "");
+
   return (
-    <div className="scrap-card">
+    <div className={`scrap-card ${mode}-card ${statusClass}`}>
 
       <div className="scrap-top">
-
         <div className="scrap-left">
-          <img src={scrapIcon} className="scrap-img" />
+
+          <img
+            src={item.icon || scrapIcon}
+            className="scrap-img"
+          />
+
           <div>
             <div className="scrap-title">
-              {item.type} - {item.weight}kg
-              {(item.status === "Pending" || item.status === "Overdue") && (
-                <img src={editIcon} className="edit-icon" alt="Edit" />
-              )}
+              {item.type} - {item.weight}
+
+              {mode === "inbound" &&
+                (item.status === "Pending" ||
+                  item.status === "Overdue") && (
+                  <img
+                    src={editIcon}
+                    className="edit-icon"
+                    alt="Edit"
+                  />
+                )}
             </div>
 
             <div className="scrap-meta">
-              {item.id} | {item.time}
+              {item.id} | {mode === "outbound"
+                ? item.date
+                : item.time}
+
+              {mode === "outbound" &&
+                item.approval && (
+                  <>
+                    {" | "}
+                    <span className="approved-dot">
+                      <img
+                        src={Approvedstat}
+                        className="stat-dot"
+                        alt="approval"
+                      />
+                      {item.approval}
+                    </span>
+                  </>
+                )}
             </div>
           </div>
         </div>
 
         <StatusBadge status={item.status} />
-
       </div>
 
-      <div className="card-actions">
+      {mode === "inbound" && (
+        <div className="card-actions">
 
-        {(item.status === "Pending" || item.status === "Overdue") && (
-          <>
-            <button className="btn btn-danger">Reject</button>
-            <button className="btn btn-success">Approve</button>
-          </>
-        )}
+          {(item.status === "Pending" ||
+            item.status === "Overdue") && (
+            <>
+              <button className="btn btn-danger">
+                Reject
+              </button>
+              <button className="btn btn-success">
+                Approve
+              </button>
+            </>
+          )}
 
-        {item.status === "Rejected" && (
-          <button className="btn btn-dark">Reopen</button>
-        )}
+          {item.status === "Rejected" && (
+            <button className="btn btn-dark">
+              Reopen
+            </button>
+          )}
+        </div>
+      )}
 
-      </div>
+      {mode === "outbound" && item.note && (
+        <div className="scrap-note outbound-note">
+          <p className="note-title">
+            Additional Note
+          </p>
+          <p className="note-text">
+            {item.note}
+          </p>
+        </div>
+      )}
+
     </div>
-  )
+  );
 }
-
