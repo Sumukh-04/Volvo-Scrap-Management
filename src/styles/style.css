@@ -262,7 +262,7 @@ body {
 select.input {
   font-size: var(--text-sm);
   font-weight: 400;
-  color: #aaaaaa;
+  color: #000;
   border-radius: var(--radius-sm);
 }
 
