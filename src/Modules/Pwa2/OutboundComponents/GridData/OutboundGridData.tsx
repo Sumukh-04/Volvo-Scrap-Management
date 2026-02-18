@@ -1,6 +1,6 @@
-import { ScrapItem } from "../ScrapCard";
-import scrapIcon from "../../../assets/image-assets/scrap_icon.png"; 
-import statImage from "../../../assets/image-assets/stat-image.png"
+import { ScrapItem } from "../../../../Common/DashboardComponents/ScrapCard";
+import scrapIcon from "../../../../assets/image-assets/scrap_icon.png"; 
+import statImage from "../../../../assets/image-assets/stat-image.png"
 
 const materials = ["Plastic", "Copper", "Aluminium", "Steel"];
 const statuses = ["Pending", "Draft", "Sent For Approval", "Resubmitted"];

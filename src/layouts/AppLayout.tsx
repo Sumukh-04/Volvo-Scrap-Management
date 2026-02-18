@@ -1,5 +1,5 @@
 import { ReactNode } from "react"
-import NavBar from "../components/dashboard/NavBar"
+import NavBar from "../Common/DashboardComponents/NavBar"
 
 type AppLayoutProps = {
   header?: ReactNode

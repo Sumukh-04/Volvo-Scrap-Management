@@ -1,8 +1,8 @@
-import syncIcon from "../assets/image-assets/sync.png"
-import AppLayout from "../layouts/AppLayout"
-import StatsRow from "../components/dashboard/StatsRow"
-import FilterBar from "../components/dashboard/FilterBar"
-import  OutboundGrid  from "../components/dashboard/GridData/OutboundGrid"
+// import syncIcon from "../../../assets/image-assets/sync.png"
+import AppLayout from "../../../layouts/AppLayout"
+import StatsRow from "../../../Common/DashboardComponents/StatsRow"
+import FilterBar from "../../../Common/DashboardComponents/Filterbar"
+import  OutboundGrid  from "../OutboundComponents/GridData/OutboundGrid"
 
 export default function Outbound() {
   return (
@@ -14,7 +14,7 @@ export default function Outbound() {
 
             <button className="btn btn-outline sync-btn">
               <img
-                src={syncIcon}
+                // src={syncIcon}
                 alt="Sync"
                 className="sync-icon"
               />

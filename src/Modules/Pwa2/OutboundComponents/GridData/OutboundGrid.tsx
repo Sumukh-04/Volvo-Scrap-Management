@@ -1,5 +1,5 @@
 import OutboundGridData from "../GridData/OutboundGridData";
-import ScrapCard from "../ScrapCard";
+import ScrapCard from "../../../../Common/DashboardComponents/ScrapCard";
 
 export default function OutboundGrid() {
   return (
