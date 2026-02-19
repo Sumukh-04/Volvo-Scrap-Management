@@ -27,25 +27,33 @@ export type ScrapItem = {
 type ScrapCardProps = {
   item: ScrapItem;
   mode?: "inbound" | "outbound";
+  onClick?: (item: ScrapItem) => void;
 };
 
 export default function ScrapCard({
   item,
   mode = "inbound",
+  onClick,
 }: ScrapCardProps) {
   const statusClass = item.status
     .toLowerCase()
     .replace(/\s/g, "");
 
   return (
-    <div className={`scrap-card ${mode}-card ${statusClass}`}>
-
+    <div
+      className={`scrap-card ${mode}-card ${statusClass}`}
+      onClick={() =>
+        mode === "outbound" &&
+        item.status === "Pending" &&
+        onClick?.(item)
+      }
+    >
       <div className="scrap-top">
         <div className="scrap-left">
-
           <img
             src={item.icon || scrapIcon}
             className="scrap-img"
+            alt="scrap"
           />
 
           <div>
@@ -64,7 +72,8 @@ export default function ScrapCard({
             </div>
 
             <div className="scrap-meta">
-              {item.id} | {mode === "outbound"
+              {item.id} |{" "}
+              {mode === "outbound"
                 ? item.date
                 : item.time}
 
@@ -91,7 +100,6 @@ export default function ScrapCard({
 
       {mode === "inbound" && (
         <div className="card-actions">
-
           {(item.status === "Pending" ||
             item.status === "Overdue") && (
             <>
@@ -122,7 +130,6 @@ export default function ScrapCard({
           </p>
         </div>
       )}
-
     </div>
   );
 }
