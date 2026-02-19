@@ -388,7 +388,7 @@ select.input:has(option:checked:not([value=""])) {
 
 .status-badge {
   padding: 4px 10px;
-  font-size: var(--text-md);
+  font-size: var(--text-sm);
   font-weight: 500;
   border-radius: 4px;
 }
@@ -512,7 +512,7 @@ select.input:has(option:checked:not([value=""])) {
   align-items: flex-start;
   padding-bottom: 12px;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 7px;
 }
 
 .scrap-left {
