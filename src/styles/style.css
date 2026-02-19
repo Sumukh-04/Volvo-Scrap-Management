@@ -76,6 +76,10 @@ textarea {
   font-family: inherit;
 }
 
+[class*="Mui"] {
+  font-family: "Volvo Novum" !important;
+}
+
 .app-shell {
   min-height: 100vh;
 }
@@ -190,7 +194,7 @@ body {
 }
 .logout-menu p {
   color: #000;
-  font-size: 12px;
+  font-size: var(--text-sm);
   font-weight: bold;
 }
 
@@ -275,6 +279,7 @@ select.input:has(option:checked:not([value=""])) {
   display: flex;
   align-items: center;
   gap: 6px;
+  color: #3E3E3E;
 }
 
 .sort-group select.input {
@@ -357,14 +362,13 @@ select.input:has(option:checked:not([value=""])) {
 
 .filter-title {
   font-weight: 500;
+  font-size: 16px;
 }
 
 .filter-controls {
   display: flex;
   align-items: center;
   gap: 12px;
-  font-size: var(--text-sm);
-  font-weight: 300;
 }
 
 .btn-filter {
@@ -373,18 +377,156 @@ select.input:has(option:checked:not([value=""])) {
   gap: 6px;
   height: 32px;
   padding: 0 12px;
-  border: 1px solid var(--primary-dark);
+  color: #3E3E3E;
+  border: 1px solid #3E3E3E;
   background: white;
   padding: 8px 12px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: var(--text-md);
-  font-weight: 500;
+  font-weight:500;
 }
 
 .filter-icon {
   width: 14px;
 }
+
+.date-field .MuiTextField-root {
+  height: 30px;
+}
+
+.date-field .MuiOutlinedInput-root {
+  height: 30px;
+  width: 197px;
+  font-size: var(--text-sm);
+  border-radius: 2px;
+}
+
+.date-field .MuiOutlinedInput-input {
+  padding: 1px 8px !important;
+  height: 28px;
+  width: 197px;
+  box-sizing: border-box;
+  font-size: var(--text-sm);
+}
+
+.date-field .MuiOutlinedInput-notchedOutline {
+  border-color: 1px #D8DBDD;
+}
+
+.filter-popper {
+  z-index: 1300;
+}
+
+.filter-dropdown {
+  background: white;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 500;
+  font-size: var(--text-md);
+}
+
+.filter-section-title {
+
+  font-size: var(--text-md);
+  font-weight: 400;
+  color: #888B8D;
+}
+
+.date-row {
+  display: flex;
+  gap: 14px;
+  border-radius: 1px;
+}
+
+.date-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.date-field label {
+  font-size: var(--text-md);
+  color: #888B8D;
+  font-weight: 400;
+}
+
+.filter-divider {
+  height: 1px;
+  background: #D8DBDD;
+  margin: 1px -16px;
+}
+
+.chip-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip-btn {
+  padding: 1px 8px;
+  border: 1px solid #D8DBDD;
+  background: white;
+  border-radius: 2px;
+  font-size: var(--text-sm);
+  font-weight: 400;
+  color: #3E3E3E;
+  cursor: pointer;
+  min-width: 67px;
+  height: 26px;
+}
+
+.chip-btn.active {
+  background: var(--primary-dark);
+  color: white;
+  font-weight: 500;
+  border: none;
+}
+
+
+.filter-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.filter-actions .MuiButton-root {
+  width: 84px;
+  height: 28px;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.btn-cancel {
+  border: 1px solid #888B8D !important;
+  color: #888B8D !important;
+  background: white !important;
+  box-shadow: none !important;
+}
+
+.btn-apply {
+  background: var(--primary-dark) !important;
+  color: white !important;
+  box-shadow: none !important;
+}
+
 
 .status-badge {
   padding: 4px 10px;

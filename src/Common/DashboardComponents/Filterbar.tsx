@@ -1,7 +1,19 @@
+import { useState } from "react"
 import filterIcon from "../../assets/image-assets/filter.png";
+import FilterModal from "./FilterModal"
 
 export default function FilterBar({ mode = "inbound" }) {
   const isOutbound = mode === "outbound";
+
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
+
+  const handleFilterClick = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    setAnchorEl(anchorEl ? null : event.currentTarget)
+  }
+
+  const open = Boolean(anchorEl)
 
   return (
     <div className="filter-row">
@@ -29,13 +41,27 @@ export default function FilterBar({ mode = "inbound" }) {
           </>
         )}
 
-        <button className="btn-filter">
-          <img src={filterIcon} className="filter-icon" alt="" />
+        <button
+          className="btn-filter"
+          onClick={handleFilterClick}
+        >
+        <img
+            src={filterIcon}
+            className="filter-icon"
+            alt=""
+        />
           Filter
         </button>
 
+        <FilterModal
+          open={open}
+          anchorEl={anchorEl}
+          onClose={() => setAnchorEl(null)}
+        />
       </div>
     </div>
   );
 }
+
+
 
