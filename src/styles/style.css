@@ -391,6 +391,8 @@ select.input:has(option:checked:not([value=""])) {
   width: 14px;
 }
 
+/* filter modal styles */
+
 .date-field .MuiTextField-root {
   height: 30px;
 }
