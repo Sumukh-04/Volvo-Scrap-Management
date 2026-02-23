@@ -2,6 +2,8 @@ import editIcon from "../../assets/image-assets/penciledit.png";
 import scrapIcon from "../../assets/image-assets/scrap_icon.png";
 import Approvedstat from "../../assets/image-assets/stats-approval_img.png";
 import StatusBadge from "./StatusBadge";
+import { useState } from "react";
+import EditScrapDialog from "./EditScrapModal";
 
 export type ScrapStatus =
   | "Pending"
@@ -39,6 +41,22 @@ export default function ScrapCard({
     .toLowerCase()
     .replace(/\s/g, "");
 
+  const [editOpen, setEditOpen] = useState(false);
+
+  const handleEditClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setEditOpen(true);
+  };
+
+  const handleEditClose = () => {
+    setEditOpen(false);
+  };
+
+  const handleEditSave = (updated: ScrapItem) => {
+    console.log("Updated scrap:", updated);
+    setEditOpen(false);
+  };
+
   return (
     <div
       className={`scrap-card ${mode}-card ${statusClass}`}
@@ -67,6 +85,7 @@ export default function ScrapCard({
                     src={editIcon}
                     className="edit-icon"
                     alt="Edit"
+                    onClick={handleEditClick}
                   />
                 )}
             </div>
@@ -130,6 +149,12 @@ export default function ScrapCard({
           </p>
         </div>
       )}
-    </div>
+    <EditScrapDialog
+        open={editOpen}
+        scrap={item}
+        onClose={handleEditClose}
+        onSave={handleEditSave}
+      />
+  </div>
   );
 }

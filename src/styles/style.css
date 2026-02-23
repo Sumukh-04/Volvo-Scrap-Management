@@ -507,13 +507,7 @@ select.input:has(option:checked:not([value=""])) {
 .filter-actions .MuiButton-root {
   width: 84px;
   height: 28px;
-  font-size: 14px;
-  font-weight: 500;
   text-transform: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
 }
 
 .btn-cancel {
@@ -527,6 +521,7 @@ select.input:has(option:checked:not([value=""])) {
   background: var(--primary-dark) !important;
   color: white !important;
   box-shadow: none !important;
+  align-items: center !important;
 }
 
 
