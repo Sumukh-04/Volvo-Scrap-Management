@@ -78,16 +78,27 @@ export default function ScrapCard({
             <div className="scrap-title">
               {item.type} - {item.weight}
 
-              {mode === "inbound" &&
-                (item.status === "Pending" ||
-                  item.status === "Overdue") && (
-                  <img
-                    src={editIcon}
-                    className="edit-icon"
-                    alt="Edit"
-                    onClick={handleEditClick}
-                  />
-                )}
+            {mode === "inbound" &&
+            (item.status === "Pending" ||
+              item.status === "Overdue") && (
+              <img
+                src={editIcon}
+                className="edit-icon"
+                alt="Edit"
+                onClick={handleEditClick}
+              />
+          )}
+
+          
+          {mode === "outbound" &&
+            item.status === "Draft" && (
+              <img
+                src={editIcon}
+                className="edit-icon"
+                alt="Edit"
+                onClick={handleEditClick}
+              />
+          )}
             </div>
 
             <div className="scrap-meta">

@@ -619,8 +619,8 @@ select.input:has(option:checked:not([value=""])) {
 }
 
 .edit-icon {
-  width: 14px;
-  height: 14px;
+  width: 19px;
+  height: 19px;
   object-fit: contain;
   cursor: pointer;
 }
