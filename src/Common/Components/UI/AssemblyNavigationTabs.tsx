@@ -59,11 +59,6 @@ export default function AssemblyNavigationTabs({
                 ? "#ffffff"
                 : "#202A44",
 
-              "&:hover": {
-                backgroundColor: "#2E3A59",
-                color: "#ffffff"
-              }
-
             }}
           >
 
