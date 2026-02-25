@@ -235,6 +235,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 4px;
 }
 
 .btn-success {
@@ -672,6 +673,30 @@ select.input:has(option:checked:not([value=""])) {
 
 .card-actions .btn {
   font-weight: 500;
+}
+
+/* Admin-Dashboard-Styles */
+
+.admin-page {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.admin-tab-btn {
+  height: 28px !important;
+  padding: 0 16px !important;
+  font-size: var(--text-md) !important;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
