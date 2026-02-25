@@ -8,9 +8,9 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Inbound />} />
-        <Route path="/:" element={<Outbound/>} />
-        <Route path="/::" element={<AdminAssembly />} /> 
+        <Route path="/inbound" element={<Inbound />} />
+        <Route path="/outbound" element={<Outbound/>} />
+        <Route path="/admin" element={<AdminAssembly />} /> 
 
       </Routes>
     </BrowserRouter>
