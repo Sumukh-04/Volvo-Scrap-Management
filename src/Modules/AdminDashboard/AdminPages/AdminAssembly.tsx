@@ -44,15 +44,28 @@ const header = (
     <AppLayout header={header}>
       <div className="admin-content">
         <div className="admin-grid">
-          {mockData.map(item => (
-            <ScrapCard
-              key={item.id}
-              item={item}
-              mode="outbound"
-            />
-          ))}
+            {activeTab === "Assembly" && (
+                mockData.map(item => (
+                <ScrapCard
+                    key={item.id}
+                    item={item}
+                    mode="outbound"
+                />
+                ))
+            )}
 
-        </div>
+            {activeTab === "Inbound" && (
+                <div className="empty-state">
+                Inbound Scrap details to be integrated soon...
+                </div>
+            )}
+
+            {activeTab === "Outbound" && (
+                <div className="empty-state">
+                Outbound Scrap details to be integrated soon...
+                </div>
+            )}
+            </div>
       </div>
     </AppLayout>
   )
