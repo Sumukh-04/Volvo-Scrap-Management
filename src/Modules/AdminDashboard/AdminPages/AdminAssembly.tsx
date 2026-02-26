@@ -9,10 +9,10 @@ import syncIcon from "../../../assets/image-assets/sync.png"
 
 const tabs = ["Assembly", "Inbound", "Outbound"]
 
-const mockData: ScrapItem[] = Array.from({ length: 21 }, (_, i) => ({
-  id: 155 + i,
-  type: "Aluminum",
-  weight: "80kg",
+const mockData: ScrapItem[] = Array.from({ length: 18 }, (_, i) => ({
+  id: 155 + i*2,
+  type: "Aluminium",
+  weight: `${80 + i*3}kg`,
   status: "Pending",
   time: "12-01-2026 16:40:29",
 }))
@@ -41,7 +41,7 @@ const header = (
 )
 
   return (
-    <AppLayout header={header}>
+    <AppLayout header={header} showSettings={true} onSettingsClick={()=> console.log("Settings clicked")}>
       <div className="admin-content">
         <div className="admin-grid">
             {activeTab === "Assembly" && (
@@ -51,6 +51,7 @@ const header = (
                     item={item}
                     mode="outbound"
                 />
+                
                 ))
             )}
 

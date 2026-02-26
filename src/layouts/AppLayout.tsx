@@ -4,16 +4,22 @@ import NavBar from "../Common/DashboardComponents/NavBar"
 type AppLayoutProps = {
   header?: ReactNode
   children: ReactNode
+  showSettings?: boolean
+  onSettingsClick?: () => void
 }
 
 export default function AppLayout({
   header,
   children,
+  showSettings = false,
+  onSettingsClick,
 }: AppLayoutProps){
   return (
     <div className="app-shell">
       {/* Global navbar */}
-      <NavBar />
+      <NavBar 
+      showSettings={showSettings}
+      onSettingsClick={onSettingsClick}/>
 
       {/* Everything below navbar */}
       <div className="app-body">

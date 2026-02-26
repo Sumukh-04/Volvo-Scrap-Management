@@ -104,9 +104,10 @@ export default function ScrapCard({
             <div className="scrap-meta">
               {item.id} |{" "}
               {mode === "outbound"
-                ? item.date
-                : item.time}
+            ? item.date || item.time
+            : item.time}
 
+            
               {mode === "outbound" &&
                 item.approval && (
                   <>
