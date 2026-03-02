@@ -1,6 +1,10 @@
-export default function StatsRow() {
+type StatsRowProps = {
+  variant?: "default" | "adminInbound" | "adminOutbound"
+}
 
-  const stats = [
+export default function StatsRow({ variant = "default" }: StatsRowProps) {
+
+  const defaultStats = [
     { label: "All Scrap", value: 325, type: "primary" },
     { label: "Pending", value: 42, type: "pending" },
     { label: "Rejected", value: 54, type: "rejected" },
@@ -8,8 +12,32 @@ export default function StatsRow() {
     { label: "Approved", value: 206, type: "approved" }
   ]
 
+    const adminInboundStats = [
+    { label: "All Scrap", value: 302, type: "primary" },
+    { label: "Pending", value: 42, type: "pending" },
+    { label: "Rejected", value: 54, type: "rejected" },
+    { label: "Approved", value: 206, type: "approved" }
+  ]
+
+  const adminOutboundStats = [
+    { label: "All Scrap", value: 325, type: "primary" },
+    { label: "Pending", value: 42, type: "pending" },
+    { label: "Rejected", value: 10, type: "rejected" },
+    { label: "Pending By Finance Team", value: 23, type: "pending" },
+    { label: "Approved", value: 206, type: "approved" }
+  ]
+
+  const stats =
+    variant === "adminInbound"
+      ? adminInboundStats
+      : defaultStats
+    variant === "adminOutbound"
+      ? adminOutboundStats
+      : defaultStats
+
+
   return (
-    <div className="stats-row">
+    <div className={`stats-row ${variant}`}>
       {stats.map((s, i) => (
         <div
           key={i}

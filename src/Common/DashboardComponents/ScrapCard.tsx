@@ -4,6 +4,8 @@ import Approvedstat from "../../assets/image-assets/stats-approval_img.png";
 import StatusBadge from "./StatusBadge";
 import { useState } from "react";
 import EditScrapDialog from "./EditScrapModal";
+import AppButton from "../Components/UI/ButtonUI";
+import calendarIcon from "../../assets/image-assets/calendar-icon.png";
 
 export type ScrapStatus =
   | "Pending"
@@ -24,11 +26,12 @@ export type ScrapItem = {
   approval?: string;
   note?: string;
   icon?: string;
+  scheduled?: boolean;
 };
 
 type ScrapCardProps = {
   item: ScrapItem;
-  mode?: "inbound" | "outbound";
+  mode?: "inbound" | "outbound" | "adminInbound";
   onClick?: (item: ScrapItem) => void;
 };
 
@@ -89,7 +92,6 @@ export default function ScrapCard({
               />
           )}
 
-          
           {mode === "outbound" &&
             item.status === "Draft" && (
               <img
@@ -150,6 +152,33 @@ export default function ScrapCard({
           )}
         </div>
       )}
+
+          {mode === "adminInbound" && (
+            <div className="card-actions">
+              {item.scheduled ? (
+                  <div className="scheduled-text">
+                    Scheduled for Today 
+                  <img
+                    src={calendarIcon}
+                    alt="calendar"
+                    className="scheduled-icon"
+                  />
+                </div>
+              ) : (
+                <AppButton variant="filled"
+                  sx={{
+                  height: 30,
+                  fontSize: "14px",
+                  padding: "2px 8px",
+                  borderRadius: "2px",
+                }}
+                >
+                  Schedule
+                </AppButton>
+              )}
+              </div>
+            )}
+
 
       {mode === "outbound" && item.note && (
         <div className="scrap-note outbound-note">
