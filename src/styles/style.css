@@ -566,7 +566,7 @@ select.input:has(option:checked:not([value=""])) {
 
 .status-badge {
   padding: 4px 10px;
-  font-size: var(--text-sm);
+  font-size: var(--text-md);
   font-weight: 500;
   border-radius: 4px;
 }
@@ -705,8 +705,8 @@ select.input:has(option:checked:not([value=""])) {
   gap: 10px;
   flex-wrap: wrap;
   margin-top: auto;
-  border-top: 2px solid #eaeaea;
-  padding-top: 20px;
+  border-top: 1px solid #eaeaea;
+  padding-top: 12px;
 }
 
 .card-actions .btn {
@@ -731,10 +731,32 @@ select.input:has(option:checked:not([value=""])) {
   font-size: var(--text-md) !important;
 }
 
-.admin-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+/* admin-inbound-styles */
+
+.stats-row.adminInbound .stat-card{
+  max-width: none;
+}
+
+.scheduled-label{
+    font-weight: 400;
+}
+
+.admin-filter-tabs{
+  display: flex;
+  gap: 14px;
+}
+
+.scheduled-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.scheduled-icon {
+  width: 18px;
+  height: 18px;
 }
 
 /* User management styles starts */
@@ -787,11 +809,13 @@ select.input:has(option:checked:not([value=""])) {
 }
 
 @media (max-width: 1024px) {
+  .stats-row,
   .scrap-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 @media (max-width: 768px) {
+  .stats-row,
   .scrap-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -820,6 +844,7 @@ select.input:has(option:checked:not([value=""])) {
     display: grid;
     grid-template-columns: 1fr;
   }
+  .stats-row,
   .scrap-meta {
     font-size: 13px;
     color: #777;
