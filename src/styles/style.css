@@ -749,9 +749,10 @@ select.input:has(option:checked:not([value=""])) {
 .scheduled-text {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: 14px;
   font-weight: 500;
+  line-height: 1.9rem;
 }
 
 .scheduled-icon {
