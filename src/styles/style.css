@@ -793,6 +793,31 @@ select.input:has(option:checked:not([value=""])) {
 }
 @media (max-width: 768px) {
   .scrap-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .page-header{
+    width: 100%;
+    
+  }
+  .stats-row{
+    overflow-x: auto;
+  }
+  .scrap-card{
+    width: 90vw;
+  }
+  .stat-card{
+    border-radius: 10px;
+    gap: 20px;
+  }
+  .stat-label{
+    white-space:nowrap;
+  }
+  .stat-value{
+    font-size: var(--text-lg);
+  }
+  .admin-grid{
+    display: grid;
     grid-template-columns: 1fr;
   }
   .scrap-meta {
