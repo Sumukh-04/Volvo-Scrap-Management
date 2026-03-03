@@ -27,14 +27,13 @@ export default function StatsRow({ variant = "default" }: StatsRowProps) {
     { label: "Approved", value: 206, type: "approved" }
   ]
 
-  const stats =
-    variant === "adminInbound"
-      ? adminInboundStats
-      : defaultStats
-    variant === "adminOutbound"
-      ? adminOutboundStats
-      : defaultStats
+  const statsMap = {
+  default: defaultStats,
+  adminInbound: adminInboundStats,
+  adminOutbound: adminOutboundStats
+    }
 
+    const stats = statsMap[variant]
 
   return (
     <div className={`stats-row ${variant}`}>

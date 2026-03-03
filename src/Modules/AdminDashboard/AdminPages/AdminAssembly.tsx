@@ -6,6 +6,7 @@ import AssemblyNavigationTabs from "../../../Common/Components/UI/AssemblyNaviga
 import "../../../styles/style.css"
 import syncIcon from "../../../assets/image-assets/sync.png"
 import AdminInbound from "./AdminInbound"
+import AdminOutbound from "./AdminOutbound";
 import StatsRow from "../../../Common/DashboardComponents/StatsRow"
 
 
@@ -28,6 +29,14 @@ const mockData2: ScrapItem[] = Array.from({ length: 18 }, (_, i) => ({
   time: "12-01-2026 16:40:29",
   scheduled: i%2===0,
 }))
+const mockData3: ScrapItem[] = Array.from({ length: 18 }, (_, i) => ({
+  id: 155 + i*2,
+  type: "Aluminium",
+  weight: `${80 + i*3}kg`,
+  status: "Chalan Generated",
+  time: "12-01-2026 16:40:29",
+  scheduled: i%2===0,
+}))
 
 export default function AdminAssembly() {
 
@@ -38,9 +47,9 @@ const getFilterMode = () => {
     case "Assembly":
       return "inbound"
     case "Inbound":
-      return "adminInbound" 
+      return "adminInbound"
     case "Outbound":
-      return "inbound"
+      return "adminOutbound"
     default:
       return "inbound"
   }
@@ -64,6 +73,9 @@ const header = (
     {activeTab === "Inbound" && (
       <StatsRow variant="adminInbound" />
     )}
+    {activeTab === "Outbound" && (
+      <StatsRow variant="adminOutbound" />
+    )}
     <FilterBar mode={getFilterMode()} /> 
   </>
 )
@@ -86,12 +98,11 @@ const header = (
             {activeTab === "Inbound" && (
                 <AdminInbound data={mockData2} />
                 )}
+                {activeTab === "Outbound" && (
+                 <AdminOutbound data={[...mockData1, ...mockData2]} />
+                )}
 
-            {activeTab === "Outbound" && (
-                <div className="empty-state">
-                Outbound Scrap details to be integrated soon...
-                </div>
-            )}
+            
       </div>
     </AppLayout>
   )
