@@ -4,6 +4,10 @@ import Approvedstat from "../../assets/image-assets/stats-approval_img.png";
 import StatusBadge from "./StatusBadge";
 import { useState } from "react";
 import EditScrapDialog from "./EditScrapModal";
+import calendarIcon from "../../assets/image-assets/calendar-icon.png";
+import AppButton from "../Components/UI/ButtonUI";
+import historyIcon from "../../assets/image-assets/history_icon.png"
+import HistoryDrawer from "../../Modules/AdminDashboard/AdminComponents/HistoryDrawer"
 
 /* -------------------- TYPES -------------------- */
 
@@ -34,6 +38,7 @@ export type ScrapItem = {
   approval?: string;
   note?: string;
   icon?: string;
+  scheduled?: boolean; // new parameter for defining which cards are scheduled and which are not in admin inbound
 };
 
 type ScrapCardProps = {
@@ -78,6 +83,8 @@ export default function ScrapCard({
       onClick?.(item);
     }
   };
+// new stuff history drawer
+  const [historyOpen, setHistoryOpen] = useState(false)
 
   /* -------------------- UI -------------------- */
 
@@ -101,9 +108,8 @@ export default function ScrapCard({
 
               {/* EDIT ICON RULES */}
 
-              {/* INBOUND + ADMIN INBOUND */}
-              {(mode === "inbound" ||
-                mode === "adminInbound") &&
+              {/* INBOUND */}
+              { mode === "inbound" &&
                 (item.status === "Pending" ||
                   item.status === "Overdue") && (
                   <img
@@ -153,13 +159,31 @@ export default function ScrapCard({
           </div>
         </div>
 
-        <StatusBadge status={item.status} />
+        {/* <StatusBadge status={item.status} />  existing before history icon implemented */}
+
+{/* this is to implement history icon in admin inbound....the history icon should show in the admin assembly as well, 
+    but since te admin assembly is conditionally rendered using outbound scrap card, couldnt implement the history icon in admin assembly*/}
+
+        <div className="scrap-status-group">
+
+          {mode === "adminInbound" && (
+            <img
+              src={historyIcon}
+              className="history-icon"
+              onClick={(e)=>{
+                e.stopPropagation()
+                setHistoryOpen(true)
+              }}
+            />
+          )}
+          <StatusBadge status={item.status} />
+        </div>
+
       </div>
 
-      {/* -------------------- INBOUND ACTIONS -------------------- */}
+      {/* -------------------- INBOUND + ADMIN INBOUND ACTIONS -------------------- */}
 
-      {(mode === "inbound" ||
-        mode === "adminInbound") && (
+      { mode === "inbound" && (
         <div className="card-actions">
           {(item.status === "Pending" ||
             item.status === "Overdue") && (
@@ -177,6 +201,32 @@ export default function ScrapCard({
             <button className="btn btn-dark">
               Reopen
             </button>
+          )}
+        </div>
+      )}
+
+      {mode === "adminInbound" && (
+        <div className="card-actions">
+          {item.scheduled ? (
+            <div className="scheduled-text">
+                Scheduled for Today
+              <img
+                src={calendarIcon}
+                alt="calendar"
+                className="scheduled-icon"
+              />
+            </div>
+          ) : (
+            <AppButton
+              variant="filled"
+              sx={{
+                height: "30px",
+                padding: "4px 10px",
+                borderRadius: "2px",
+              }}
+            >
+              Schedule
+            </AppButton>
           )}
         </div>
       )}
@@ -232,6 +282,24 @@ export default function ScrapCard({
         onClose={handleEditClose}
         onSave={handleEditSave}
       />
+      
+      {/* History Drawer Icon and Data */}
+    <HistoryDrawer
+      open={historyOpen}
+      onClose={()=>setHistoryOpen(false)}
+      scrapTitle={`${item.type} - ${item.weight}`}
+      history={[
+        {title:"Pending by Finance Team"},
+        {title:"Pending by Plant Head"},
+        {title:"Pending by L3 Manager"},
+        {title:"Pending by L2 Manager"},
+        {title:"Approved by L1 Manager", user:"elliot.debrunner@volvo.com", time:"12-01-2026 16:40:29"},
+        {title:"Sent for approval from outbound", user:"lukas.kiener@volvo.com", time:"12-01-2026 16:40:29", comment:"Significant discrepancy in scrap condition; approval cannot be granted at this stage."},
+        {title:"Scheduled to outbound by admin", user:"sandro.freund@volvo.com", time:"12-01-2026 16:40:29"},
+        {title:"Approved by sentry", user:"dennis.wechsler@volvo.com", time:"12-01-2026 16:40:29", comment:"Scrap contains different material looks acceptable."},
+        {title:"Scrap from assembly",user:"sandro.freund@volvo.com", time:"12-01-2026 16:40:29"},
+      ]}
+    />
     </div>
   );
 }

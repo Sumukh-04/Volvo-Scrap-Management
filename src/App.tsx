@@ -13,7 +13,7 @@ export default function App() {
       <Routes>
         <Route path="/inbound" element={<Inbound />} />
         <Route path="/" element={<Outbound/>} />
-        <Route path="/admin" element={<AdminAssembly />} /> 
+        <Route path="/admin" element={<AdminAssembly />} />
         <Route
           path="/usermanagement"
           element={
