@@ -26,7 +26,7 @@ export default function App() {
           path="/levelmanagement"
           element={
             <AppLayout showSettings={true}>
-              <LevelManagement />
+              <LevelManagement/>
             </AppLayout>
           }
         />
