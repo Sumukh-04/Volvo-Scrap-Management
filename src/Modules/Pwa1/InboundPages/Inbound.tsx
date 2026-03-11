@@ -3,6 +3,7 @@ import AppLayout from "../../../layouts/AppLayout"
 import StatsRow from "../../../Common/DashboardComponents/StatsRow"
 import FilterBar from "../../../Common/DashboardComponents/Filterbar"
 import ScrapGrid from "../../../Common/DashboardComponents/ScrapGrid"
+import SyncButton from "../../../Common/Components/UI/SyncButton"
 
 export default function Inbound() {
   return (
@@ -12,13 +13,7 @@ export default function Inbound() {
           <div className="flex-between">
             <h2 className="page-title">Sentry Dashboard</h2>
 
-            <button className="btn btn-outline sync-btn">
-              <img
-                src={syncIcon}
-                alt="Sync"
-                className="sync-icon"
-              />
-            </button>
+          <SyncButton/>
           </div>
 
           <StatsRow />

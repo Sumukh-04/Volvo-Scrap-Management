@@ -4,11 +4,10 @@ import ScrapCard, { ScrapItem } from "../../../Common/DashboardComponents/ScrapC
 import FilterBar from "../../../Common/DashboardComponents/Filterbar"
 import AssemblyNavigationTabs from "../../../Common/Components/UI/AssemblyNavigationTabs"
 import "../../../styles/style.css"
-import syncIcon from "../../../assets/image-assets/sync.png"
 import AdminInbound from "./AdminInbound"
 import AdminOutbound from "./AdminOutbound";
 import StatsRow from "../../../Common/DashboardComponents/StatsRow"
-
+import SyncButton from "../../../Common/Components/UI/SyncButton"
 
 
 const tabs = ["Assembly", "Inbound", "Outbound"]
@@ -68,13 +67,7 @@ const header = (
         value={activeTab as "Assembly" | "Inbound" | "Outbound"}
         onChange={setActiveTab}
       />
-      <button className="btn btn-outline sync-btn">
-        <img
-          src={syncIcon}
-          alt="Sync"
-          className="sync-icon"
-        />
-      </button> 
+    <SyncButton/>
     </div>
     {activeTab === "Inbound" && (
       <StatsRow variant="adminInbound" />

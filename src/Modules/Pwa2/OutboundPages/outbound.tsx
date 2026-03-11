@@ -1,4 +1,4 @@
-import syncIcon from "../../../assets/image-assets/sync.png"
+import SyncButton from "../../../Common/Components/UI/SyncButton"
 import AppLayout from "../../../layouts/AppLayout"
 import StatsRow from "../../../Common/DashboardComponents/StatsRow"
 import FilterBar from "../../../Common/DashboardComponents/Filterbar"
@@ -11,14 +11,7 @@ export default function Outbound() {
         <>
           <div className="flex-between">
             <h2 className="page-title">Egress Dashboard</h2>
-
-            <button className="btn btn-outline sync-btn">
-              <img
-                src={syncIcon}
-                alt="Sync"
-                className="sync-icon"
-              />
-            </button>
+            <SyncButton/>
           </div>
 
           <StatsRow />
