@@ -1,3 +1,5 @@
+import { useState } from "react"
+import ConfirmActionDialog from "../../../Common/Components/UI/ConfirmActionDialog"
 import { ScrapItem } from "../../../Common/DashboardComponents/ScrapCard";
 import Approvedstat from "../../../assets/image-assets/stats-approval_img.png";
 import StatusBadge from "../../../Common/DashboardComponents/StatusBadge";
@@ -9,6 +11,17 @@ type Props = {
 };
 
 export default function AdminOutboundCard({ item }: Props) {
+
+  const [confirmOpen, setConfirmOpen] = useState(false)
+  const [confirmAction, setConfirmAction] = useState<
+    "Approve" | "Reject" | "Send Approval Mail" | null>(null)
+  
+  const openConfirm = (
+    action: "Approve" | "Reject" | "Send Approval Mail") => {
+    setConfirmAction(action)
+    setConfirmOpen(true)
+  }  
+
   return (
     <div className="scrap-card adminOutbound-card">
       
@@ -112,22 +125,40 @@ export default function AdminOutboundCard({ item }: Props) {
         <div className="admin-actions">
           {item.status === "Pending" && (
             <>
-              <button className="btn btn-danger">
+              <button
+                className="btn btn-danger"
+                onClick={() => openConfirm("Reject")}
+              >
                 Reject
               </button>
-              <button className="btn btn-success">
+              <button
+                className="btn btn-success"
+                onClick={() => openConfirm("Approve")}
+              >
                 Approve
               </button>
             </>
           )}
           {["Approved", "Challan Generated"].includes(item.status) && (
-            <AppButton variant="filled">
-                Send Approval Mail
-            </AppButton>
+          <AppButton
+            variant="filled"
+            onClick={() => openConfirm("Send Approval Mail")}
+          >
+            Send Approval Mail
+          </AppButton>
             )}
 
         </div>
       </div>
+      <ConfirmActionDialog
+        open={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        onConfirm={() => {
+          console.log(`${confirmAction} confirmed for ${item.id}`)
+          setConfirmOpen(false)
+        }}
+        message={`Do you want to ${confirmAction} Scrap (${item.id}) : ${item.type} - ${item.weight}?`}
+      />
     </div>
   );
 }

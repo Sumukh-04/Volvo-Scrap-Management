@@ -8,6 +8,7 @@ import calendarIcon from "../../assets/image-assets/calendar-icon.png";
 import AppButton from "../Components/UI/ButtonUI";
 import historyIcon from "../../assets/image-assets/history_icon.png"
 import HistoryDrawer from "../../Modules/AdminDashboard/AdminComponents/HistoryDrawer"
+import ConfirmActionDialog from "../Components/UI/ConfirmActionDialog";
 
 /* -------------------- TYPES -------------------- */
 
@@ -85,7 +86,13 @@ export default function ScrapCard({
   };
 // new stuff history drawer
   const [historyOpen, setHistoryOpen] = useState(false)
-
+//Confirm Action Dialog
+    const [confirmOpen, setConfirmOpen] = useState(false)
+    const [confirmAction, setConfirmAction] = useState<"Approve" | "Reject" | "Schedule" | null>(null)
+    const openConfirm = (action: "Approve" | "Reject" | "Schedule") => {
+    setConfirmAction(action)
+    setConfirmOpen(true)
+  }
   /* -------------------- UI -------------------- */
 
   return (
@@ -188,12 +195,25 @@ export default function ScrapCard({
           {(item.status === "Pending" ||
             item.status === "Overdue") && (
             <>
-              <button className="btn btn-danger">
+              {/* <button className="btn btn-danger">
                 Reject
               </button>
               <button className="btn btn-success">
                 Approve
+              </button> */}
+              <button
+                className="btn btn-danger"
+                onClick={() => openConfirm("Reject")}
+              >
+                Reject
               </button>
+              <button
+                className="btn btn-success"
+                onClick={() => openConfirm("Approve")}
+              >
+                Approve
+              </button>
+
             </>
           )}
 
@@ -224,6 +244,7 @@ export default function ScrapCard({
                 padding: "4px 10px",
                 borderRadius: "2px",
               }}
+              onClick={()=>openConfirm("Schedule")}
             >
               Schedule
             </AppButton>
@@ -300,6 +321,17 @@ export default function ScrapCard({
         {title:"Scrap from assembly",user:"sandro.freund@volvo.com", time:"12-01-2026 16:40:29"},
       ]}
     />
+
+      <ConfirmActionDialog
+        open={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        onConfirm={() => {
+          console.log(`${confirmAction} confirmed`)
+          setConfirmOpen(false)
+        }}
+        message={`Do you want to ${confirmAction} Scrap ${item.id} : ${item.type} - ${item.weight}?`}
+      />
+
     </div>
   );
 }
