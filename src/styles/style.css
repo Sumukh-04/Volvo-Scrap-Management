@@ -598,10 +598,16 @@ select.input:has(option:checked:not([value=""])) {
   background: var(--approved-bg);
   color: var(--approved-text);
 }
-.status-draft {
+.status-draft{
   background: #e2e8f5;
   color: #4d5b80;
 }
+
+.status-challan.generated{
+  background:#DFE4F0;
+  color:var(--primary-dark);
+}
+
 .scrap-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -621,6 +627,13 @@ select.input:has(option:checked:not([value=""])) {
 .stat-dot {
   margin-right: 5px !important;
 }
+
+.approved-dot{
+  display:flex;
+  align-items:center;
+  gap: 1px;
+}
+
 .note-title {
   margin-top: 0px;
   margin-bottom: 0px;
@@ -682,6 +695,10 @@ select.input:has(option:checked:not([value=""])) {
   margin-top: 6px;
   font-weight: 400;
   line-height: 1.1;
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap: 1px;
 }
 
 .scrap-top {
@@ -741,6 +758,14 @@ select.input:has(option:checked:not([value=""])) {
     font-weight: 400;
 }
 
+.admin-filter-btn{
+  height:28px;
+  font-size:14px;
+  padding:4px 14px;
+  border-radius:2px;
+  min-width:auto;
+}
+
 .admin-filter-tabs{
   display: flex;
   gap: 14px;
@@ -784,17 +809,43 @@ select.input:has(option:checked:not([value=""])) {
   height: 15px;
 }
 /* Admin outbound structural styles diffference styles to be implemented via this style */
+
+.scrap-title-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
+}
 .adminOutbound-card .scrap-left {
   display: flex;
   align-items: flex-start; 
   gap: 10px;
+  width: 100%;
+}
+
+.admin-outbound-img{
+  width:110px;
+  height:150px;
+  object-fit:cover;
+  border-radius:2px;
+}
+
+.scrap-content{
+  flex:1;
+  min-width:0;
 }
 .admin-outbound-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr); 
   gap: 20px;
 }
-.comment-title {
+
+.digital-sign-row{
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+.comment-title, .finance-team-digital-sign-title {
   font-size: 14px;
   font-weight: 400;
   color: #6b7280;
@@ -802,7 +853,7 @@ select.input:has(option:checked:not([value=""])) {
   margin-bottom: 0px;
 }
 
-.comment-text {
+.comment-text, .finance-team-digital-sign-name {
   font-size: 14px;
   color: #000; 
   margin: 0;
@@ -818,9 +869,6 @@ select.input:has(option:checked:not([value=""])) {
   background-color: #e5e7eb; /* light gray */
 }
 
-.admin-actions{
-  font-weight: 500;
-}
 /* ===============================
    APPROVAL LEVEL SECTION
 ================================= */
@@ -863,9 +911,11 @@ select.input:has(option:checked:not([value=""])) {
   height: 30px;
   padding-left: 20px;
   padding-right: 20px;
+  font-weight: 500;
 }
 .admin-actions .btn-success{
   height: 30px;
+  font-weight: 500;
 }
 
 /* History icon styles on scrap card */
@@ -1013,7 +1063,7 @@ select.input:has(option:checked:not([value=""])) {
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
-  .scrap-meta {
+  /* .scrap-meta {
     font-size: 13px;
     color: #777;
     margin-top: 6px;
@@ -1022,8 +1072,103 @@ select.input:has(option:checked:not([value=""])) {
     display: flex !important;
     flex-direction: column !important;
     gap: 10px !important;
+  } */
+
+  /*Stats Row  */
+
+  .stats-row{
+    gap:14px;
   }
+
+  .stat-card{
+    height:52px;
+    padding:0 14px;
+  }
+
+  .stat-label{
+    font-size:14px;
+  }
+
+  .stat-value{
+    font-size:24px;
+  }
+
+/* filter row for admin inbound */
+
+  /* .filter-row {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-top: 10px;
+  flex-direction: column;
+  gap: 10px;
+} */
+
+  /* Scrap Grid*/
+
+  .scrap-grid{
+    grid-template-columns: repeat(2, 1fr);
+    gap:18px;
+  }
+
+
+  /*Scrap Card*/
+
+  .scrap-title{
+    font-size:15px;
+  }
+
+  .scrap-meta{
+    font-size:12px;
+    gap:6px;
+  }
+
+  .status-badge{
+    font-size: 12px;
+    padding: 4px 6px;
+  }
+
+  .edit-icon {
+    width: 13px;
+    height: 13px;
 }
+
+  .scrap-img{
+    width:30px;
+    height:30px;
+  }
+
+  .admin-filter-tabs{
+    gap:3px;
+    flex-wrap:wrap;
+  }
+
+  .admin-filter-btn{
+    height: 24px;
+    font-size:12px;
+  }
+
+  .level-email{
+  font-size:10px;
+  max-width:80px;     
+  white-space:nowrap;   
+  overflow:hidden;
+  text-overflow:ellipsis;
+  }
+
+  .level-circle {
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  }
+
+  .approval-levels {
+    gap: 5px; 
+  }
+
+}
+
+
 
 @media (max-width: 1024px) {
   .stats-row,

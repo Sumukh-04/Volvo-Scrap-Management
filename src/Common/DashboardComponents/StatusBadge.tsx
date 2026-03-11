@@ -3,6 +3,12 @@ export type ScrapStatus =
   | "Approved"
   | "Rejected"
   | "Overdue"
+  | "Draft"
+  | "Sent For Approval"
+  | "Resubmitted"
+  | "Pending by Finance Team"
+  | "Challan Generated";
+
 
 type StatusBadgeProps = {
   status: ScrapStatus

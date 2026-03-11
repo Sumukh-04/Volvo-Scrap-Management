@@ -29,13 +29,19 @@ const mockData2: ScrapItem[] = Array.from({ length: 18 }, (_, i) => ({
   time: "12-01-2026 16:40:29",
   scheduled: i%2===0,
 }))
-const mockData3: ScrapItem[] = Array.from({ length: 18 }, (_, i) => ({
+const mockData3: ScrapItem[] = Array.from({ length: 5 }, (_, i) => ({
   id: 155 + i*2,
   type: "Aluminium",
   weight: `${80 + i*3}kg`,
-  status: "Chalan Generated",
+  status: "Challan Generated",
   time: "12-01-2026 16:40:29",
-  scheduled: i%2===0,
+}))
+const mockData4: ScrapItem[] = Array.from({ length: 5 }, (_, i) => ({
+  id: 155 + i*2,
+  type: "Plastic",
+  weight: `${80 + i*3}kg`,
+  status: "Pending by Finance Team",
+  time: "12-01-2026 16:40:29",
 }))
 
 export default function AdminAssembly() {
@@ -99,7 +105,7 @@ const header = (
                 <AdminInbound data={mockData2} />
                 )}
                 {activeTab === "Outbound" && (
-                 <AdminOutbound data={[...mockData1, ...mockData2]} />
+                 <AdminOutbound data={[...mockData1, ...mockData2,...mockData3,...mockData4]} />
                 )}
 
             

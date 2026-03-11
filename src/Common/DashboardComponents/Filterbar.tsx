@@ -10,7 +10,7 @@ type FilterBarProps = {
 export default function FilterBar({ mode = "inbound" }: FilterBarProps) {
 
   const isOutbound = mode === "outbound";
-  const isAdminInbound = mode === "adminInbound"
+  const isAdminInbound = mode === "adminInbound";
 
 
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null)
@@ -33,15 +33,9 @@ export default function FilterBar({ mode = "inbound" }: FilterBarProps) {
       {isAdminInbound && (
         <div className="admin-filter-tabs">
           <AppButton
+            className="admin-filter-btn"
             variant={activeTab === "All" ? "filled" : "outlined"}
             onClick={() => setActiveTab("All")}
-            sx={{
-              height: 28,
-              fontSize: "14px",
-              padding: "4px 14px",
-              borderRadius: "2px",
-              minWidth: "auto",
-            }}
           >
           <div className="scheduled-label">
             All
@@ -49,15 +43,9 @@ export default function FilterBar({ mode = "inbound" }: FilterBarProps) {
           </AppButton>
 
           <AppButton
+            className="admin-filter-btn"
             variant={activeTab === "Today" ? "filled" : "outlined"}
             onClick={() => setActiveTab("Today")}
-            sx={{
-              height: 28,
-              fontSize: "14px",
-              padding: "4px 14px",
-              borderRadius: "2px",
-              minWidth: "auto",
-            }}
           >
           <div className="scheduled-label">
             Scheduled for today (15)
@@ -65,15 +53,9 @@ export default function FilterBar({ mode = "inbound" }: FilterBarProps) {
           </AppButton>
 
           <AppButton
+            className="admin-filter-btn"
             variant={activeTab === "Tomorrow" ? "filled" : "outlined"}
             onClick={() => setActiveTab("Tomorrow")}
-            sx={{
-              height: 28,
-              fontSize: "14px",
-              padding: "4px 14px",
-              borderRadius: "2px",
-              minWidth: "auto",
-            }}
           >
           <div className="scheduled-label">
             Scheduled for Tomorrow (10)
@@ -81,15 +63,9 @@ export default function FilterBar({ mode = "inbound" }: FilterBarProps) {
           </AppButton>
 
           <AppButton
+            className="admin-filter-btn"
             variant={activeTab === "Unscheduled" ? "filled" : "outlined"}
             onClick={() => setActiveTab("Unscheduled")}
-            sx={{
-              height: 28,
-              fontSize: "14px",
-              padding: "4px 14px",
-              borderRadius: "2px",
-              minWidth: "auto",
-            }}
           >
           <div className="scheduled-label">
             Unscheduled (6)

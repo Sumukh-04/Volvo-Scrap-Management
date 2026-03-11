@@ -1,8 +1,8 @@
 import { ScrapItem } from "../../../Common/DashboardComponents/ScrapCard";
-import scrapIcon from "../../../assets/image-assets/scrap_icon.png";
 import Approvedstat from "../../../assets/image-assets/stats-approval_img.png";
 import StatusBadge from "../../../Common/DashboardComponents/StatusBadge";
 import AppButton from "../../../Common/Components/UI/ButtonUI";
+import statImage from "../../../assets/image-assets/stat-image.png"
 
 type Props = {
   item: ScrapItem;
@@ -16,63 +16,73 @@ export default function AdminOutboundCard({ item }: Props) {
       <div className="scrap-top">
         <div className="scrap-left">
           <img
-            src={item.icon || scrapIcon}
-            className="scrap-img"
+            src={item.icon || statImage}
+            className="admin-outbound-img"
             alt="scrap"
           />
 
-          <div>
-            <div className="scrap-title">
-              {item.type} - {item.weight}
-            </div>
+          <div className="scrap-content">
+            <div className="scrap-title-row">
+              <div className="scrap-title">
+                {item.type} - {item.weight}
+              </div>
 
+              <StatusBadge status={item.status} />
+            </div>
             <div className="scrap-meta">
               {item.id} | {item.date || item.time}
 
-              {item.approval && (
-                <>
-                  {" | "}
-                  <span className="approved-dot">
-                    <img
-                      src={Approvedstat}
-                      className="stat-dot"
-                      alt="approval"
-                    />
-                    {item.approval}
-                  </span>
-                </>
-              )}
+              <span className="approved-dot">
+                <span>|</span>
+                <img
+                  src={Approvedstat}
+                  className="stat-dot"
+                  alt="approval"
+                />
+                <span>Sentry Approved</span>
+              </span>
             </div>
+            {["Pending", "Pending by Finance Team"].includes(item.status) && (
+              <>
+                {/* L1 Comment */}
+                <div className="scrap-comment">
+                  <p className="comment-title">L1 Comment</p>
+                  <p className="comment-text">
+                    Verified and approved. Significant discrepancy in scrap condition; approval cannot be granted at this stage.
+                  </p>
+                </div>
 
-            {/* L1 Comment */}
-            <div className="scrap-comment">
-              <p className="comment-title">L1 Comment</p>
-              <p className="comment-text">
-                Verified and approved. Significant discrepancy in scrap condition; approval cannot be granted at this stage.
-              </p>
-            </div>
-
-            {/* L2 Comment */}
-            <div className="scrap-comment">
-              <p className="comment-title">L2 Comment</p>
-              <p className="comment-text">
-                Significant discrepancy in scrap condition; approval cannot be granted at this stage.
-              </p>
-            </div>
+                {/* L2 Comment */}
+                <div className="scrap-comment">
+                  <p className="comment-title">L2 Comment</p>
+                  <p className="comment-text">
+                    Significant discrepancy in scrap condition; approval cannot be granted at this stage.
+                  </p>
+                </div>
+              </>
+            )}
 
             {/* Finance Comment */}
-            {item.status === "Approved" && (
-              <div className="scrap-comment finance-comment">
-                <p className="comment-title">Finance Team Comment</p>
-                <p className="comment-text">
-                  Significant discrepancy in scrap condition; approval cannot be granted at this stage.
-                </p>
-              </div>
+            {["Approved", "Challan Generated"].includes(item.status) && (
+                <div className="digital-sign">
+                  <div className="digital-sign-row">
+                    <span className="finance-team-digital-sign-title">
+                      Digital signature : 
+                    </span>
+                    <span className="finance-team-digital-sign-name">
+                         Lucas Leon
+                      </span>
+                  </div>
+                  <div className="scrap-comment finance-comment">
+                    <p className="comment-title">Finance Team Comment</p>
+                    <p className="comment-text">
+                      Significant discrepancy in scrap condition; approval cannot be granted at this stage.
+                    </p>
+                  </div>  
+                </div>
             )}
-          </div>
+          </div> 
         </div>
-
-        <StatusBadge status={item.status} />
       </div>
 
       
@@ -100,7 +110,6 @@ export default function AdminOutboundCard({ item }: Props) {
 
         {/* Action Buttons */}
         <div className="admin-actions">
-
           {item.status === "Pending" && (
             <>
               <button className="btn btn-danger">
@@ -111,10 +120,9 @@ export default function AdminOutboundCard({ item }: Props) {
               </button>
             </>
           )}
-
-          {["Approved", "Chalan Generated"].includes(item.status) && (
+          {["Approved", "Challan Generated"].includes(item.status) && (
             <AppButton variant="filled">
-                Send Approve Mail
+                Send Approval Mail
             </AppButton>
             )}
 

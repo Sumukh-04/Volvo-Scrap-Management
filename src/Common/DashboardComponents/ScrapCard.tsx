@@ -19,8 +19,8 @@ export type ScrapStatus =
   | "Draft"
   | "Sent For Approval"
   | "Resubmitted"
-  | "Pending by Finance team"
-  | "Chalan Generated";
+  | "Pending by Finance Team"
+  | "Challan Generated";
 
 export type ScrapMode =
   | "inbound"
@@ -268,7 +268,7 @@ export default function ScrapCard({
           )}
 
           {item.status ===
-            "Pending by Finance team" && (
+            "Pending by Finance Team" && (
             <button className="btn btn-warning">
               Waiting for Finance
             </button>
