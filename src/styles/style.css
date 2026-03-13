@@ -256,7 +256,7 @@ body {
 }
 
 .sync-icon.rotating {
-  animation: spin 1s linear infinite;
+  animation: spin 1s linear 10;
 }
 
 .sync-btn:disabled {
@@ -365,8 +365,11 @@ select.input:has(option:checked:not([value=""])) {
 }
 
 .stat-card.primary {
-  background: var(--primary-dark);
-  color: white;
+  background: white;
+  color: #202a44;
+}
+.stat-card.primary .stat-value{
+  color: #ffc107;
 }
 
 .stat-label {
@@ -395,8 +398,14 @@ select.input:has(option:checked:not([value=""])) {
   color: var(--overdue-text);
 }
 
-.stat-card.primary .stat-value {
-  color: white;
+
+.stat-card.active {
+  background-color:  #202a44;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  color: #fff;
+}
+.stat-card.active .stat-value {
+  color: #fff;
 }
 
 .filter-controls {
@@ -1062,6 +1071,7 @@ select.input:has(option:checked:not([value=""])) {
   font-weight: 400;
   font-size:14px;
 }
+
 
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {

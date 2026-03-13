@@ -1,10 +1,13 @@
 import SyncButton from "../../../Common/Components/UI/SyncButton"
+import {useState} from "react"
 import AppLayout from "../../../layouts/AppLayout"
 import StatsRow from "../../../Common/DashboardComponents/StatsRow"
 import FilterBar from "../../../Common/DashboardComponents/Filterbar"
 import  OutboundGrid  from "../OutboundComponents/GridData/OutboundGrid"
 
 export default function Outbound() {
+
+  const[filter , setFilter] =useState("All Scrap")
   return (
     <AppLayout
       header={
@@ -14,12 +17,14 @@ export default function Outbound() {
             <SyncButton/>
           </div>
 
-          <StatsRow />
+          <StatsRow 
+          variant="outbound"
+          onFilterChange={setFilter} />
           <FilterBar mode="outbound" />
         </>
       }
     >
-      <OutboundGrid/>
+      <OutboundGrid filter={filter}/>
     </AppLayout>
   )
 }

@@ -17,7 +17,7 @@ export default function SyncButton({ onSync }: Props) {
     } finally {
       setTimeout(() => {
         setIsSyncing(false)
-      }, 1000)
+      }, 5000)
     }
   }
 
