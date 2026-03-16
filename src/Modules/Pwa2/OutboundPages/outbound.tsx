@@ -19,7 +19,14 @@ export default function Outbound() {
 
           <StatsRow 
           variant="outbound"
-          onFilterChange={setFilter} />
+          onFilterChange={setFilter}
+          data={[
+    { type: "all", value: 15 },
+    { type: "pending", value: 5 },
+    { type: "draft", value: 3 },
+    { type: "sent for approval", value: 4 },
+    { type: "resubmitted", value: 3 },
+  ]} />
           <FilterBar mode="outbound" />
         </>
       }

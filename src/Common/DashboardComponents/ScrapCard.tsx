@@ -218,7 +218,8 @@ export default function ScrapCard({
           )}
 
           {item.status === "Rejected" && (
-            <button className="btn btn-dark">
+            <button className="btn btn-dark"
+             onClick={() => openConfirm("Reopen")}>
               Reopen
             </button>
           )}

@@ -7,9 +7,11 @@ import Pagination from "@mui/material/Pagination"
 type Props = {
   filter: string
   mode?: ScrapMode
+  data?: ScrapItem[]  // optional: allow parent to pass data
 }
 
-const data: ScrapItem[] = [
+// default data if parent doesn't provide
+const defaultData: ScrapItem[] = [
   { id:1, type:"Aluminum", weight:"1kg", status:"pending", time:"3-02-2026 00:00" },
   { id:2, type:"Plastic", weight:"1kg", status:"pending", time:"3-02-2026 00:00" },
   { id:3, type:"Magnesium", weight:"1kg", status:"pending", time:"3-02-2026 00:00" },
@@ -30,55 +32,45 @@ const data: ScrapItem[] = [
   { id:18, type:"Others", weight:"111kg", status:"Overdue", time:"3-02-2026 00:00" }
 ]
 
-export default function ScrapGrid({ filter, mode = "inbound" }: Props) {
-
+export default function ScrapGrid({ filter, mode = "inbound", data: propData }: Props) {
   const [loading, setLoading] = useState(true)
   const [page, setPage] = useState(1)
+  const itemsPerPage = 12
 
-  const itemPerpage = 12
+  // use propData if provided, otherwise fallback to defaultData
+  const data = propData || defaultData
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2500)
+    const timer = setTimeout(() => setLoading(false), 1500) // simulate loading
     return () => clearTimeout(timer)
   }, [])
+
   useEffect(() => {
-  setPage(1)
-}, [filter])
+    setPage(1)
+  }, [filter])
 
   const filteredData =
     filter === "all"
       ? data
-      : data.filter(
-          (item) =>
-            item.status.toLowerCase() === filter.toLowerCase()
-        )
+      : data.filter((item) => item.status.toLowerCase() === filter.toLowerCase())
 
-  // Pagination Logic 
-  const startIndex = (page - 1) * itemPerpage
-  const paginatedData = filteredData.slice(startIndex, startIndex + itemPerpage)
+  const startIndex = (page - 1) * itemsPerPage
+  const paginatedData = filteredData.slice(startIndex, startIndex + itemsPerPage)
 
   return (
     <>
       <div className="scrap-grid">
-
         {loading
-          ? Array.from({ length: 18 }).map((_, i) => (
-              <ScrapCardSkeleton key={i} />
-            ))
+          ? Array.from({ length: itemsPerPage }).map((_, i) => <ScrapCardSkeleton key={i} />)
           : paginatedData.map((item) => (
-              <ScrapCard
-                key={item.id}
-                item={item}
-                mode={mode}
-              />
+              <ScrapCard key={item.id} item={item} mode={mode} />
             ))}
-
       </div>
 
-      {!loading && (
+      {!loading && filteredData.length > itemsPerPage && (
         <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
           <Pagination
-            count={Math.ceil(filteredData.length / itemPerpage)}
+            count={Math.ceil(filteredData.length / itemsPerPage)}
             page={page}
             onChange={(e, value) => setPage(value)}
           />

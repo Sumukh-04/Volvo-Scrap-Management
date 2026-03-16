@@ -1,53 +1,73 @@
 import { useState, useEffect } from "react";
 import ScrapCardSkeleton from "../Components/Skeleton/skeleton"; 
 type StatsRowProps = {
-  variant?: "default" | "adminInbound" | "adminOutbound";
+  variant?: "default" | "adminInbound" | "adminOutbound" | "inbound" | "outbound";
   onFilterChange?: (filter: string) => void;
+  data?: any[];
 };
 
 export default function StatsRow({
   variant = "default",
   onFilterChange,
+  data
 }: StatsRowProps) {
   const [activeFilter, setActiveFilter] = useState<string>("all");
   const [loading, setLoading] = useState<boolean>(true); 
 
   const defaultStats = [
-    { label: "All Scrap", value: 325, type: "all" },
-    { label: "Pending", value: 42, type: "pending" },
-    { label: "Rejected", value: 54, type: "rejected" },
-    { label: "Overdue", value: 23, type: "overdue" },
-    { label: "Approved", value: 206, type: "approved" },
+    { label: "All Scrap",  type: "all" },
+    { label: "Pending",  type: "pending" },
+    { label: "Rejected",  type: "rejected" },
+    { label: "Overdue",  type: "overdue" },
+    { label: "Approved",  type: "approved" },
+  ];
+   const inboundtStats = [
+    { label: "All Scrap",  type: "all" },
+    { label: "Pending",  type: "pending" },
+    { label: "Rejected",  type: "rejected" },
+    { label: "Overdue",  type: "overdue" },
+    { label: "Approved",  type: "approved" },
   ];
 
   const adminInboundStats = [
-    { label: "All Scrap", value: 302, type: "all" },
-    { label: "Pending", value: 42, type: "pending" },
-    { label: "Rejected", value: 54, type: "rejected" },
-    { label: "Approved", value: 206, type: "approved" },
+    { label: "All Scrap",  type: "all" },
+    { label: "Pending",  type: "pending" },
+    { label: "Rejected",  type: "rejected" },
+    { label: "Approved",  type: "approved" },
   ];
 
   const adminOutboundStats = [
-    { label: "All Scrap", value: 325, type: "primary" },
-    { label: "Approved", value: 206, type: "approved" },
-    { label: "Pending", value: 42, type: "pending" },
-    { label: "Rejected", value: 10, type: "rejected" },
-    { label: "Finance Pending", value: 23, type: "finance pending" },
-    { label: "Chalan Generated", value: 206, type: "chalan generated" },
+    { label: "All Scrap",  type: "all" },
+    { label: "Approved",  type: "approved" },
+    { label: "Pending",  type: "pending" },
+    { label: "Rejected",  type: "rejected" },
+    { label: "Finance Pending",  type: "pending by finance team" },
+    { label: "Challan Generated",  type: "challan generated" },
   ];
   const outboundStats = [
-      { label: "All Scrap", value: 325, type: "all" }, 
-      { label: "Pending", value: 42, type: "pending" },
-      { label: "Draft", value: 20, type: "draft" },
-      { label: "Sent For Approval", value: 30, type: "sent for approval" },
-      { label: "Resubmitted", value: 30, type: "resubmitted" } ]
+      { label: "All Scrap", value:24, type: "all" }, 
+      { label: "Pending",  type: "pending" },
+      { label: "Draft",  type: "draft" },
+      { label: "Sent For Approval",  type: "sent for approval" },
+      { label: "Resubmitted",  type: "resubmitted" } ]
 
   const statsMap = {
     default: defaultStats,
     adminInbound: adminInboundStats,
     adminOutbound: adminOutboundStats,
     outbound: outboundStats,
+    inbound: adminInboundStats,
   };
+
+  const countByStatus = (status: string) => {
+  if (!data) return 0;
+
+  if (status === "all") return data.length;
+
+  return data.filter(
+    (item) => item.status?.toLowerCase() === status.toLowerCase() 
+  ).length;
+};
 
  const stats = statsMap[variant] || [];
 
@@ -77,7 +97,7 @@ export default function StatsRow({
              onClick={() => handleClick(s.type)}
             >
               <div className="stat-label">{s.label}</div>
-              <div className="stat-value">{s.value}</div>
+             <div className="stat-value">{countByStatus(s.type)}</div>
             </div>
           ))}
     </div>

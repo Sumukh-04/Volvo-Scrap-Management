@@ -7,40 +7,70 @@ import Pagination from "@mui/material/Pagination";
 type AdminOutboundProps = {
   data: ScrapItem[];
   loading?: boolean;
+  filter?: string;
+  emptyMessage?: string;
 };
 
-export default function AdminOutbound({ data, loading }: AdminOutboundProps) {
+export default function AdminOutbound({
+  data,
+  loading = false,
+  filter = "all",
+  emptyMessage = "No outbound scrap found",
+}: AdminOutboundProps) {
 
   const [page, setPage] = useState(1);
   const itemsPerPage = 6;
 
+  // 🔹 Filtering logic
+  const filteredData =
+    filter === "all"
+      ? data
+      : data.filter(
+          (item) =>
+            item.status.toLowerCase() === filter.toLowerCase()
+        );
+
   const startIndex = (page - 1) * itemsPerPage;
-  const paginatedData = data.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedData = filteredData.slice(startIndex, startIndex + itemsPerPage);
 
   useEffect(() => {
     setPage(1);
-  }, [data]);
+  }, [data, filter]);
 
   return (
     <>
       <div className="scrap-grid admin-outbound-grid">
 
-        {loading
-          ? Array.from({ length: 18 }).map((_, i) => (
-              <div key={i}>
-                <ScrapCardSkeleton />
-              </div>
-            ))
-          : paginatedData.map((item) => (
-              <AdminOutboundCard key={item.id} item={item} />
-            ))}
+        {loading ? (
+          Array.from({ length: 18 }).map((_, i) => (
+            <div key={i}>
+              <ScrapCardSkeleton />
+            </div>
+          ))
+        ) : filteredData.length === 0 ? (
+
+          <div className="empty-state">
+            {emptyMessage}
+          </div>
+
+        ) : (
+          paginatedData.map((item) => (
+            <AdminOutboundCard key={item.id} item={item} />
+          ))
+        )}
 
       </div>
 
-      {!loading && (
-        <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+      {!loading && filteredData.length > 0 && (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+          }}
+        >
           <Pagination
-            count={Math.ceil(data.length / itemsPerPage)}
+            count={Math.ceil(filteredData.length / itemsPerPage)}
             page={page}
             onChange={(e, value) => setPage(value)}
           />
