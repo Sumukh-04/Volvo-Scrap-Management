@@ -28,6 +28,7 @@ export default function NavBar({
         src={logo}
         alt="Volvo Logo"
         className="logo-img"
+        onClick={()=> handleNavigation("/")}
       />
 
       <div className="right-section">

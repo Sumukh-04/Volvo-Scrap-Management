@@ -7,7 +7,7 @@ import SyncButton from "../../../Common/Components/UI/SyncButton"
 
 export default function Inbound() {
 
-  const [filter, setFilter] = useState("All Scrap")
+  const [filter, setFilter] = useState("all")
 
   return (
     <AppLayout

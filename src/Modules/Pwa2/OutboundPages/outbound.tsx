@@ -7,7 +7,7 @@ import  OutboundGrid  from "../OutboundComponents/GridData/OutboundGrid"
 
 export default function Outbound() {
 
-  const[filter , setFilter] =useState("All Scrap")
+  const[filter , setFilter] =useState("all")
   return (
     <AppLayout
       header={

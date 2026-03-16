@@ -8,13 +8,14 @@ import {
   Checkbox,
   Chip,
   IconButton,
-  Paper
+  Paper,
+  Pagination
 } from "@mui/material";
 
 import Delete from "../../../assets/image-assets/bin_delete.png";
 import AppButton from "../../../Common/Components/UI/ButtonUI";
 import backArrow from "../../../assets/image-assets/Back_Arrow.png";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type User = {
   id: number;
@@ -63,6 +64,7 @@ const getRoleColors = (role: string) => {
       return { bg: "#e0e0e0", text: "#000" };
   }
 };
+
 const stickyTopRow = {
   position: "sticky",
   top: 0,
@@ -73,13 +75,18 @@ const stickyTopRow = {
 
 const stickySecondRow = {
   position: "sticky",
-  top: 45, 
+  top: 45,
   backgroundColor: "#fff",
   zIndex: 2
 };
 
 export default function UserManagement() {
+
   const [users, setUsers] = useState<User[]>(generateUsers(40));
+
+  // pagination state
+  const [page, setPage] = useState(1);
+  const rowsPerPage = 10;
 
   const handleCheckboxChange = (id: number, field: keyof User) => {
     setUsers((prev) =>
@@ -93,8 +100,16 @@ export default function UserManagement() {
     setUsers((prev) => prev.filter((user) => user.id !== id));
   };
 
+  const startIndex = (page - 1) * rowsPerPage;
+  const paginatedUsers = users.slice(startIndex, startIndex + rowsPerPage);
+
+  useEffect(() => {
+    setPage(1);
+  }, [users]);
+
   return (
     <Box>
+
       {/* Header */}
       <div className="User-task">
         <div className="left-user-main">
@@ -130,39 +145,44 @@ export default function UserManagement() {
           overflow: "auto"
         }}
       >
+
         <Table stickyHeader>
-    <TableHead>
 
-  <TableRow>
-    <TableCell sx={stickyTopRow}>Employee ID</TableCell>
-    <TableCell sx={stickyTopRow}>User Name</TableCell>
-    <TableCell sx={stickyTopRow}>Email ID</TableCell>
-    <TableCell sx={stickyTopRow} align="center">Role</TableCell>
-    <TableCell sx={stickyTopRow} align="center">Assembly</TableCell>
-    <TableCell sx={stickyTopRow} align="center">Inbound</TableCell>
-    <TableCell sx={stickyTopRow} align="center" colSpan={3}>
-      Outbound
-    </TableCell>
-    <TableCell sx={stickyTopRow} align="center">Action</TableCell>
-  </TableRow>
+          <TableHead>
 
-  
-  <TableRow>
-    <TableCell sx={stickySecondRow} />
-    <TableCell sx={stickySecondRow} />
-    <TableCell sx={stickySecondRow} />
-    <TableCell sx={stickySecondRow} />
-    <TableCell sx={stickySecondRow} />
-    <TableCell sx={stickySecondRow} />
-    <TableCell sx={stickySecondRow} align="center">L1</TableCell>
-    <TableCell sx={stickySecondRow} align="center">L2</TableCell>
-    <TableCell sx={stickySecondRow} align="center">L3</TableCell>
-    <TableCell sx={stickySecondRow} />
-  </TableRow>
-</TableHead>
+            <TableRow>
+              <TableCell sx={stickyTopRow}>Employee ID</TableCell>
+              <TableCell sx={stickyTopRow}>User Name</TableCell>
+              <TableCell sx={stickyTopRow}>Email ID</TableCell>
+              <TableCell sx={stickyTopRow} align="center">Role</TableCell>
+              <TableCell sx={stickyTopRow} align="center">Assembly</TableCell>
+              <TableCell sx={stickyTopRow} align="center">Inbound</TableCell>
+              <TableCell sx={stickyTopRow} align="center" colSpan={3}>
+                Outbound
+              </TableCell>
+              <TableCell sx={stickyTopRow} align="center">Action</TableCell>
+            </TableRow>
+
+            <TableRow>
+              <TableCell sx={stickySecondRow} />
+              <TableCell sx={stickySecondRow} />
+              <TableCell sx={stickySecondRow} />
+              <TableCell sx={stickySecondRow} />
+              <TableCell sx={stickySecondRow} />
+              <TableCell sx={stickySecondRow} />
+              <TableCell sx={stickySecondRow} align="center">L1</TableCell>
+              <TableCell sx={stickySecondRow} align="center">L2</TableCell>
+              <TableCell sx={stickySecondRow} align="center">L3</TableCell>
+              <TableCell sx={stickySecondRow} />
+            </TableRow>
+
+          </TableHead>
+
           <TableBody>
-            {users.map((user) => (
+
+            {paginatedUsers.map((user) => (
               <TableRow key={user.id} hover>
+
                 <TableCell>{user.id}</TableCell>
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.email}</TableCell>
@@ -208,7 +228,6 @@ export default function UserManagement() {
                   />
                 </TableCell>
 
-                {/* Outbound L1 */}
                 <TableCell align="center">
                   <Checkbox
                     checked={user.l1}
@@ -221,7 +240,6 @@ export default function UserManagement() {
                   />
                 </TableCell>
 
-                {/* Outbound L2 */}
                 <TableCell align="center">
                   <Checkbox
                     checked={user.l2}
@@ -234,7 +252,6 @@ export default function UserManagement() {
                   />
                 </TableCell>
 
-                {/* Outbound L3 */}
                 <TableCell align="center">
                   <Checkbox
                     checked={user.l3}
@@ -247,7 +264,6 @@ export default function UserManagement() {
                   />
                 </TableCell>
 
-                {/* Delete */}
                 <TableCell align="center">
                   <IconButton onClick={() => handleDelete(user.id)}>
                     <img
@@ -261,11 +277,38 @@ export default function UserManagement() {
                     />
                   </IconButton>
                 </TableCell>
+
               </TableRow>
             ))}
+
           </TableBody>
         </Table>
       </Paper>
+
+      {/* Pagination */}
+      <Box
+  sx={{
+    position: "sticky",
+    bottom: 0,
+    background: "#fff",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    padding: "5px 0",
+    borderTop: "1px solid #e0e0e0",
+    zIndex: 5,
+    borderBottomLeftRadius:"10px",
+    borderBottomRightRadius:"10px",
+    boxShadow: "0 -2px 6px rgba(0,0,0,0.05)"
+  }}
+>
+  <Pagination
+    count={Math.ceil(users.length / rowsPerPage)}
+    page={page}
+    onChange={(e, value) => setPage(value)}
+  />
+</Box>
+
     </Box>
   );
 }

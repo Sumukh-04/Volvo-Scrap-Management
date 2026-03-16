@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react"
 import ScrapCard, { ScrapItem } from "../../../Common/DashboardComponents/ScrapCard"
 import ScrapCardSkeleton from "../../../Common/Components/Skeleton/skeleton"
+import Pagination from "@mui/material/Pagination"
 
 type AdminInboundProps = {
   data: ScrapItem[]
@@ -7,6 +9,19 @@ type AdminInboundProps = {
 }
 
 export default function AdminInbound({ data, loading = false }: AdminInboundProps) {
+
+  const [page, setPage] = useState(1)
+
+  const itemsPerPage = 12
+
+  // pagination logic
+  const startIndex = (page - 1) * itemsPerPage
+  const paginatedData = data.slice(startIndex, startIndex + itemsPerPage)
+
+  // reset page when data changes
+  useEffect(() => {
+    setPage(1)
+  }, [data])
 
   return (
     <>
@@ -18,7 +33,7 @@ export default function AdminInbound({ data, loading = false }: AdminInboundProp
                 <ScrapCardSkeleton />
               </div>
             ))
-          : data.map((item) => (
+          : paginatedData.map((item) => (
               <div className="admin-inbound-card" key={item.id}>
                 <ScrapCard
                   item={item}
@@ -28,6 +43,16 @@ export default function AdminInbound({ data, loading = false }: AdminInboundProp
             ))}
 
       </div>
+
+      {!loading && (
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+          <Pagination
+            count={Math.ceil(data.length / itemsPerPage)}
+            page={page}
+            onChange={(e, value) => setPage(value)}
+          />
+        </div>
+      )}
     </>
   )
 }

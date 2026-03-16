@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import ScrapCard from "./ScrapCard"
 import ScrapCardSkeleton from "../Components/Skeleton/skeleton"
 import type { ScrapItem, ScrapMode } from "./ScrapCard"
+import Pagination from "@mui/material/Pagination"
 
 type Props = {
   filter: string
@@ -32,35 +33,57 @@ const data: ScrapItem[] = [
 export default function ScrapGrid({ filter, mode = "inbound" }: Props) {
 
   const [loading, setLoading] = useState(true)
+  const [page, setPage] = useState(1)
+
+  const itemPerpage = 12
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 2500)
     return () => clearTimeout(timer)
   }, [])
+  useEffect(() => {
+  setPage(1)
+}, [filter])
 
   const filteredData =
-    filter === "All Scrap"
+    filter === "all"
       ? data
       : data.filter(
           (item) =>
             item.status.toLowerCase() === filter.toLowerCase()
         )
 
+  // Pagination Logic 
+  const startIndex = (page - 1) * itemPerpage
+  const paginatedData = filteredData.slice(startIndex, startIndex + itemPerpage)
+
   return (
-    <div className="scrap-grid">
+    <>
+      <div className="scrap-grid">
 
-      {loading
-        ? Array.from({ length: 18 }).map((_, i) => (
-            <ScrapCardSkeleton key={i} />
-          ))
-        : filteredData.map((item) => (
-            <ScrapCard
-              key={item.id}
-              item={item}
-              mode={mode}
-            />
-          ))}
+        {loading
+          ? Array.from({ length: 18 }).map((_, i) => (
+              <ScrapCardSkeleton key={i} />
+            ))
+          : paginatedData.map((item) => (
+              <ScrapCard
+                key={item.id}
+                item={item}
+                mode={mode}
+              />
+            ))}
 
-    </div>
+      </div>
+
+      {!loading && (
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}>
+          <Pagination
+            count={Math.ceil(filteredData.length / itemPerpage)}
+            page={page}
+            onChange={(e, value) => setPage(value)}
+          />
+        </div>
+      )}
+    </>
   )
 }

@@ -372,6 +372,10 @@ select.input:has(option:checked:not([value=""])) {
   color: #ffc107;
 }
 
+.stat-card.all-active .stat-value{
+  color: #ffc107;
+}
+
 .stat-label {
   font-size: var(--text-lg);
   font-weight: 500;
@@ -397,7 +401,15 @@ select.input:has(option:checked:not([value=""])) {
 .stat-card.overdue .stat-value {
   color: var(--overdue-text);
 }
-
+.stat-card.resubmitted .stat-value {
+  color: var(--overdue-text);
+}
+.stat-card.sent.for.approval .stat-value {
+  color: #489844;
+}
+.stat-card.active .stat-value{
+  color: #ffc107 !important;
+}
 
 .stat-card.active {
   background-color:  #202a44;
@@ -405,7 +417,7 @@ select.input:has(option:checked:not([value=""])) {
   color: #fff;
 }
 .stat-card.active .stat-value {
-  color: #fff;
+  color: #fff !important;
 }
 
 .filter-controls {
@@ -1071,7 +1083,38 @@ select.input:has(option:checked:not([value=""])) {
   font-weight: 400;
   font-size:14px;
 }
+/* container */
+.MuiPagination-root {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 
+/* numbers */
+.MuiPaginationItem-root {
+  font-family: NestleTF;
+  font-size: 13px;
+  border-radius: 6px;
+  color: #333;
+  border: 1px solid #dcdcdc;
+}
+
+/* hover */
+.MuiPaginationItem-root:hover {
+  background-color: #f2f4f7;
+}
+
+/* active page */
+.MuiPaginationItem-root.Mui-selected {
+  background-color: #202a44 !important;
+  color: #fff;
+  border-color: #202a44;
+}
+
+/* arrows */
+.MuiPaginationItem-previousNext {
+  color: #202a44;
+}
 
 
 @media only screen and (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
