@@ -60,6 +60,9 @@ export default function ScrapCard({
     .toLowerCase()
     .replace(/\s+/g, "-");
 
+    
+const normalizedStatus = item.status?.trim().toLowerCase();
+
   const [editOpen, setEditOpen] = useState(false);
 
   const handleEditClick = (e: React.MouseEvent) => {
@@ -116,17 +119,16 @@ export default function ScrapCard({
               {/* EDIT ICON RULES */}
 
               {/* INBOUND */}
-              { mode === "inbound" &&
-                (item.status === "Pending" ||
-                  item.status === "Overdue") && (
-                  <img
-                    src={editIcon}
-                    className="edit-icon"
-                    alt="Edit"
-                    onClick={handleEditClick}
-                  />
+                  {mode === "inbound" &&
+                  (normalizedStatus === "pending" ||
+                    normalizedStatus === "overdue") && (
+                    <img
+                      src={editIcon}
+                      className="edit-icon"
+                      alt="Edit"
+                      onClick={handleEditClick}
+                    />
                 )}
-
               {/* OUTBOUND + ADMIN OUTBOUND */}
               {(mode === "outbound" ||
                 mode === "adminOutbound") &&
@@ -190,41 +192,36 @@ export default function ScrapCard({
 
       {/* -------------------- INBOUND + ADMIN INBOUND ACTIONS -------------------- */}
 
-      { mode === "inbound" && (
-        <div className="card-actions">
-          {(item.status === "Pending" ||
-            item.status === "Overdue") && (
-            <>
-              {/* <button className="btn btn-danger">
-                Reject
-              </button>
-              <button className="btn btn-success">
-                Approve
-              </button> */}
-              <button
-                className="btn btn-danger"
-                onClick={() => openConfirm("Reject")}
-              >
-                Reject
-              </button>
-              <button
-                className="btn btn-success"
-                onClick={() => openConfirm("Approve")}
-              >
-                Approve
-              </button>
+                {mode === "inbound" && (
+                  <div className="card-actions">
+                    {(normalizedStatus === "pending" ||
+                      normalizedStatus === "overdue") && (
+                      <>
+                        <button
+                          className="btn btn-danger"
+                          onClick={() => openConfirm("Reject")}
+                        >
+                          Reject
+                        </button>
+                        <button
+                          className="btn btn-success"
+                          onClick={() => openConfirm("Approve")}
+                        >
+                          Approve
+                        </button>
+                      </>
+                    )}
 
-            </>
-          )}
-
-          {item.status === "Rejected" && (
-            <button className="btn btn-dark"
-             onClick={() => openConfirm("Reopen")}>
-              Reopen
-            </button>
-          )}
-        </div>
-      )}
+                    {normalizedStatus === "rejected" && (
+                      <button
+                        className="btn btn-dark"
+                        onClick={() => openConfirm("Reopen")}
+                      >
+                        Reopen
+                      </button>
+                    )}
+                  </div>
+                )}
 
       {mode === "adminInbound" && (
         <div className="card-actions">
