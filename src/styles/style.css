@@ -904,6 +904,38 @@ select.input:has(option:checked:not([value=""])) {
   background-color: #e5e7eb; /* light gray */
 }
 
+/* L1 L2 L3 Card Styles*/
+
+.L1L2L3-card .scrap-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.approval-text {
+  font-size: 14px;
+  color: var(--approved-text);
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.L1L2L3-card .card-divider {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.L1L2L3-card .admin-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.L1L2L3-card .scrap-left {
+  width: 100%;
+}
+
+
+
 /* ===============================
    APPROVAL LEVEL SECTION
 ================================= */

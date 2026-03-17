@@ -21,7 +21,7 @@ export type ScrapStatus =
   | "Sent For Approval"
   | "Resubmitted"
   | "Pending by Finance Team"
-  | "Chalan Generated";
+  | "Challan Generated";
 
 export type ScrapMode =
   | "inbound"
