@@ -904,49 +904,6 @@ select.input:has(option:checked:not([value=""])) {
   background-color: #e5e7eb; /* light gray */
 }
 
-/* L1 L2 L3 Card Styles*/
-
-.L1L2L3-card .scrap-content {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.L1L2L3-card .scrap-meta {
-  margin-top: 1px;  
-}
-
-.scrap-environmental-engineer-comment .comment-title{
-  font-size: 12px;
-}
-
-.approval-text {
-  font-size: 14px;
-  color: #000;
-  font-weight: 400;
-  margin-top: 2px;
-}
-
-.approval-label {
-  color: var(--approved-text);
-}
-
-.L1L2L3-card .card-divider {
-  margin-top: 4px;
-  margin-bottom: 4px;
-}
-
-.L1L2L3-card .admin-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-}
-
-.L1L2L3-card .scrap-left {
-  width: 100%;
-}
-
-
 
 /* ===============================
    APPROVAL LEVEL SECTION
@@ -995,6 +952,127 @@ select.input:has(option:checked:not([value=""])) {
 .admin-actions .btn-success{
   height: 30px;
   font-weight: 500;
+}
+
+/* L1 L2 L3 Card Styles*/
+
+.L1L2L3-card .scrap-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.L1L2L3-card .scrap-meta {
+  margin-top: 1px;  
+}
+
+.scrap-environmental-engineer-comment .comment-title{
+  font-size: 12px;
+}
+
+.approval-text {
+  font-size: 14px;
+  color: #000;
+  font-weight: 400;
+  margin-top: 2px;
+}
+
+.approval-label {
+  color: var(--approved-text);
+}
+
+.L1L2L3-card .card-divider {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.L1L2L3-card .admin-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.L1L2L3-card .scrap-left {
+  width: 100%;
+}
+
+/* FINANCE TEAM CARD */
+
+.FinanceTeam-card .scrap-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.FinanceTeam-card .scrap-meta {
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.finance-team-bottom-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+/* approval section spacing */
+.finance-team-bottom-row .approval-levels {
+  display: flex;
+  gap: 28px; /* tighter than adminOutbound */
+  align-items: center;
+}
+
+/* each user */
+.finance-team-bottom-row .approval-user {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+/* circle */
+.finance-team-bottom-row .level-circle {
+  width: 26px;
+  height: 26px;
+  font-size: 11px;
+}
+
+.finance-team-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.finance-team-actions .btn-danger {
+  height: 30px;
+  padding: 0 18px;
+}
+
+.finance-team-actions .MuiButton-root {
+  height: 30px;
+  padding: 0 18px;
+  border-radius: 2px !important;
+}
+
+.FinanceTeam-card .scrap-left {
+  width: 100%;
+}
+
+.status-with-file-attachments-icon {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.file-attachment-icon {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
 }
 
 /* History icon styles on scrap card */

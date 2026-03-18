@@ -6,6 +6,7 @@ import AdminAssembly from "./Modules/AdminDashboard/AdminPages/AdminAssembly"
 import L1L2L3Management from "./Modules/AdminDashboard/AdminPages/L1L2L3Management"
 import UserManagement from "./Modules/AdminDashboard/AdminPages/Usermanagement"
 import LevelManagement from "./Modules/AdminDashboard/AdminPages/LevelManagement"
+import FinanceTeam from "./Modules/AdminDashboard/AdminPages/FinanceTeam"
 import AppLayout from "./layouts/AppLayout"
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/" element={<Outbound/>} />
         <Route path="/admin" element={<AdminAssembly />} />
         <Route path="/l1" element={<L1L2L3Management />} />
+        <Route path="/fin" element={<FinanceTeam />} />        
         <Route
           path="/usermanagement"
           element={

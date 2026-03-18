@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ScrapCardSkeleton from "../Components/Skeleton/skeleton"; 
 
 type StatsRowProps = {
-  variant?: "default" | "adminInbound" | "adminOutbound" | "inbound" | "outbound" | "l1l2l3";
+  variant?: "default" | "adminInbound" | "adminOutbound" | "inbound" | "outbound" | "l1l2l3" | "financeTeam";
   onFilterChange?: (filter: string) => void;
   data?: any[];
   activeFilter?: string; 
@@ -26,7 +26,7 @@ export default function StatsRow({
     { label: "Approved",  type: "approved" },
   ];
 
-  const inboundtStats = [
+  const inboundStats = [
     { label: "All Scrap",  type: "all" },
     { label: "Pending",  type: "pending" },
     { label: "Rejected",  type: "rejected" },
@@ -65,13 +65,22 @@ export default function StatsRow({
     { label: "Approved",  type: "approved" },    
   ];
 
+  const financeStats = [
+    { label: "All Scrap",  type: "all" },
+    { label: "Pending",  type: "pending" },
+    { label: "Rejected",  type: "rejected" },
+    { label: "Overdue", type:"overdue" },
+    { label: "Challan Generated",  type: "challan generated" },
+  ];  
+
   const statsMap = {
     default: defaultStats,
     adminInbound: adminInboundStats,
     adminOutbound: adminOutboundStats,
     outbound: outboundStats,
-    inbound: adminInboundStats,
+    inbound: inboundStats,
     l1l2l3: l1l2l3Stats,
+    financeTeam: financeStats,
   };
 
   const countByStatus = (status: string) => {

@@ -4,25 +4,34 @@ import AppLayout from "../../../layouts/AppLayout"
 import { ScrapItem } from "../../../Common/DashboardComponents/ScrapCard"
 import StatsRow from "../../../Common/DashboardComponents/StatsRow"
 import FilterBar from "../../../Common/DashboardComponents/Filterbar"
-import L1L2L3Card from "../AdminComponents/L1L2L3Card"
 import ScrapCardSkeleton from "../../../Common/Components/Skeleton/skeleton"
+import FinanceTeamCard from "../AdminComponents/FinanceTeamCard"
 import Pagination from "@mui/material/Pagination"
 
 const mockData1: ScrapItem[] = Array.from({ length: 18 }, (_, i) => ({
   id: 155 + i * 2,
-  type: "Aluminium",
+  type: "Plastic",
   weight: `${80 + i * 3}kg`,
   status: "Pending",
   time: "12-01-2026 16:40:29",
 }))
 
-export default function L1L2L3Management() {
+const mockData2: ScrapItem[] = Array.from({ length: 18 }, (_, i) => ({
+  id: 155 + i * 2,
+  type: "Plastic",
+  weight: `${80 + i * 3}kg`,
+  status: "Challan Generated",
+  time: "12-01-2026 16:40:29",
+}))
+
+export default function FinanceTeam() {
 
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState("all")
 
   const [page, setPage] = useState(1)
   const itemsPerPage = 6
+  const combinedData = [...mockData1, ...mockData2]
 
   // initial load
   useEffect(() => {
@@ -38,8 +47,8 @@ export default function L1L2L3Management() {
   // 🔹 filtering logic
   const filteredData =
     filter === "all"
-      ? mockData1
-      : mockData1.filter(
+      ? combinedData
+      : combinedData.filter(
           (item) =>
             item.status.toLowerCase() === filter.toLowerCase()
         )
@@ -54,14 +63,14 @@ export default function L1L2L3Management() {
   const header = (
     <>
       <div className="flex-between">
-        <h2 className="page-title">Dashboard</h2>
+        <h2 className="page-title">Finance Team Dashboard</h2>
         <SyncButton />
       </div>
 
       <StatsRow
-        variant="adminInbound"
+        variant="financeTeam"
         onFilterChange={setFilter}
-        data={mockData1}
+        data={[...mockData1,...mockData2]}
       />
 
       <FilterBar mode="outbound" />
@@ -82,7 +91,7 @@ export default function L1L2L3Management() {
           </div>
         ) : (
           paginatedData.map((item) => (
-            <L1L2L3Card key={item.id} item={item} />
+            <FinanceTeamCard key={item.id} item={item} />
           ))
         )}
 
