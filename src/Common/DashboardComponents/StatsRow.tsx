@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
 import ScrapCardSkeleton from "../Components/Skeleton/skeleton"; 
+
 type StatsRowProps = {
   variant?: "default" | "adminInbound" | "adminOutbound" | "inbound" | "outbound" | "l1l2l3";
   onFilterChange?: (filter: string) => void;
   data?: any[];
+  activeFilter?: string; 
 };
 
 export default function StatsRow({
   variant = "default",
   onFilterChange,
-  data
+  data,
+  activeFilter: externalFilter = "all"   // ✅ renamed prop (no removal)
 }: StatsRowProps) {
-  const [activeFilter, setActiveFilter] = useState<string>("all");
+
+  const [activeFilter, setActiveFilter] = useState<string>("all"); // ✅ kept
   const [loading, setLoading] = useState<boolean>(true); 
 
   const defaultStats = [
@@ -21,7 +25,8 @@ export default function StatsRow({
     { label: "Overdue",  type: "overdue" },
     { label: "Approved",  type: "approved" },
   ];
-   const inboundtStats = [
+
+  const inboundtStats = [
     { label: "All Scrap",  type: "all" },
     { label: "Pending",  type: "pending" },
     { label: "Rejected",  type: "rejected" },
@@ -44,19 +49,21 @@ export default function StatsRow({
     { label: "Finance Pending",  type: "pending by finance team" },
     { label: "Challan Generated",  type: "challan generated" },
   ];
+
   const outboundStats = [
-      { label: "All Scrap", value:24, type: "all" }, 
-      { label: "Pending",  type: "pending" },
-      { label: "Draft",  type: "draft" },
-      { label: "Sent For Approval",  type: "sent for approval" },
-      { label: "Resubmitted",  type: "resubmitted" } 
-    ];
+    { label: "All Scrap", value: 24, type: "all" }, 
+    { label: "Pending",  type: "pending" },
+    { label: "Draft",  type: "draft" },
+    { label: "Sent For Approval",  type: "sent for approval" },
+    { label: "Resubmitted",  type: "resubmitted" } 
+  ];
+
   const l1l2l3Stats = [
     { label: "All Scrap",  type: "all" },
     { label: "Pending",  type: "pending" },
     { label: "Rejected",  type: "rejected" },
     { label: "Approved",  type: "approved" },    
-    ];
+  ];
 
   const statsMap = {
     default: defaultStats,
@@ -68,28 +75,34 @@ export default function StatsRow({
   };
 
   const countByStatus = (status: string) => {
-  if (!data) return 0;
+    if (!data) return 0;
 
-  if (status === "all") return data.length;
+    if (status === "all") return data.length;
 
-  return data.filter(
-    (item) => item.status?.toLowerCase() === status.toLowerCase() 
-  ).length;
-};
+    return data.filter(
+      (item) => item.status?.toLowerCase() === status.toLowerCase()
+    ).length;
+  };
 
- const stats = statsMap[variant] || [];
+  const stats = statsMap[variant] || [];
 
+  const handleClick = (label: string) => {
+    setActiveFilter(label);        // ✅ keep local update
+    onFilterChange?.(label);       // ✅ notify parent
+  };
 
- const handleClick = (label: string) => {
-  setActiveFilter(label);
-  onFilterChange?.(label);
-};
-
-  // Simulate data loading
+  // ⏳ Simulated loading
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2500); // 2.5s for loading.
+    const timer = setTimeout(() => setLoading(false), 2500);
     return () => clearTimeout(timer);
   }, []);
+
+  // 🔥 NEW: Sync parent filter → local state
+  useEffect(() => {
+    if (externalFilter !== undefined) {
+      setActiveFilter(externalFilter);
+    }
+  }, [externalFilter]);
 
   return (
     <div className={`stats-row ${variant}`}>
@@ -99,13 +112,13 @@ export default function StatsRow({
             <div
               key={i}
               className={`stat-card ${s.type} ${
-               activeFilter === s.type ? "active" : ""
+                activeFilter === s.type ? "active" : ""
               }`}
               data-status={s.type}
-             onClick={() => handleClick(s.type)}
+              onClick={() => handleClick(s.type)}
             >
               <div className="stat-label">{s.label}</div>
-             <div className="stat-value">{countByStatus(s.type)}</div>
+              <div className="stat-value">{countByStatus(s.type)}</div>
             </div>
           ))}
     </div>
