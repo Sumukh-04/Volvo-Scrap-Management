@@ -912,16 +912,28 @@ select.input:has(option:checked:not([value=""])) {
   gap: 6px;
 }
 
+.L1L2L3-card .scrap-meta {
+  margin-top: 1px;  
+}
+
+.scrap-environmental-engineer-comment .comment-title{
+  font-size: 12px;
+}
+
 .approval-text {
   font-size: 14px;
-  color: var(--approved-text);
+  color: #000;
   font-weight: 400;
   margin-top: 2px;
 }
 
+.approval-label {
+  color: var(--approved-text);
+}
+
 .L1L2L3-card .card-divider {
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .L1L2L3-card .admin-actions {
@@ -1167,7 +1179,7 @@ select.input:has(option:checked:not([value=""])) {
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) {
-  /* .scrap-meta {
+  .scrap-meta {
     font-size: 13px;
     color: #777;
     margin-top: 6px;
@@ -1176,7 +1188,7 @@ select.input:has(option:checked:not([value=""])) {
     display: flex !important;
     flex-direction: column !important;
     gap: 10px !important;
-  } */
+  }
 
   /*Stats Row  */
 

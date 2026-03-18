@@ -57,22 +57,22 @@ export default function L1L2L3Card({ item }: Props) {
             {["Pending"].includes(item.status) && (
               <>
                 {/* Environmental Engineer Comment */}
-                <div className="scrap-comment">
+                <div className="scrap-environmental-engineer-comment">
                   <p className="comment-title">Environmental Engineer Comment</p>
                   <p className="comment-text">
                     Significant discrepancy in scrap condition; approval cannot be granted at this stage.
                   </p>
                 </div>
                 {/* Approval by L1,L2 */}
-<div className="approval-text">
-  <span className="approval-label">Approved by</span>{" "}
-  eric.jason@volvo.com (L1)
-</div>
+                <div className="approval-text">
+                  <span className="approval-label">Approved by</span>{" "}
+                  eric.jason@volvo.com (L1)
+                </div>
 
-<div className="approval-text">
-  <span className="approval-label">Approved by</span>{" "}
-  leon.david@volvo.com (L2)
-</div>
+                <div className="approval-text">
+                  <span className="approval-label">Approved by</span>{" "}
+                  leon.david@volvo.com (L2)
+                </div>
               </>
             )}
 
