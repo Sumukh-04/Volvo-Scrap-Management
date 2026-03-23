@@ -28,7 +28,7 @@ export default function OutboundGrid({ filter }: Props) {
     return () => clearTimeout(timer);
   }, []);
 
-  // ✅ Reset page when filter changes
+  // Reset page when filter changes
   useEffect(() => {
     setpage(1);
   }, [filter]);
