@@ -35,11 +35,11 @@ export default function FinanceTeamCard({ item }: Props) {
             alt="scrap"
           />
 
-        <div className="scrap-content">
-            <div className="scrap-title-row">
-              <div className="scrap-title">
-                {item.type} - {item.weight}
-              </div>
+          <div className="scrap-content">
+              <div className="scrap-title-row">
+                <div className="scrap-title">
+                  {item.type} - {item.weight}
+                </div>
 
             <div className="status-with-file-attachments-icon">
             {item.status === "Challan Generated" && (

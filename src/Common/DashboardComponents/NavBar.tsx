@@ -59,7 +59,8 @@ export default function NavBar({
         )}
 
         {/* ACCOUNT SECTION */}
-        <div className="account-widget">
+        <div className="account-widget"
+          onClick={() => setShowLog(!showLog)}>
           <div className="avatar-box">
             <img
               src={avatarImg}
@@ -77,7 +78,6 @@ export default function NavBar({
             src={DownArrow}
             alt="dropdown"
             className="dropdown-arrow"
-            onClick={() => setShowLog(!showLog)}
           />
 
           {showLog && (

@@ -193,12 +193,14 @@ body {
 
 .logo-img {
   height: 15px;
+  cursor: pointer;
 }
 
 .account-widget {
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 .avatar-box {
@@ -1022,23 +1024,8 @@ select.input:has(option:checked:not([value=""])) {
 /* approval section spacing */
 .finance-team-bottom-row .approval-levels {
   display: flex;
-  gap: 28px; /* tighter than adminOutbound */
+  gap: 28px;
   align-items: center;
-}
-
-/* each user */
-.finance-team-bottom-row .approval-user {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-/* circle */
-.finance-team-bottom-row .level-circle {
-  width: 26px;
-  height: 26px;
-  font-size: 11px;
 }
 
 .finance-team-actions {
@@ -1051,6 +1038,7 @@ select.input:has(option:checked:not([value=""])) {
 .finance-team-actions .btn-danger {
   height: 30px;
   padding: 0 18px;
+  font-weight: 500;
 }
 
 .finance-team-actions .MuiButton-root {
@@ -1252,7 +1240,6 @@ select.input:has(option:checked:not([value=""])) {
     font-weight: 400;
     line-height: 1.1;
     display: flex !important;
-    flex-direction: column !important;
     gap: 10px !important;
   }
 }
@@ -1264,8 +1251,8 @@ select.input:has(option:checked:not([value=""])) {
     font-weight: 400;
     line-height: 1.1;
     display: flex !important;
-    flex-direction: column !important;
     gap: 10px !important;
+
   }
 
   /*Stats Row  */
@@ -1286,17 +1273,6 @@ select.input:has(option:checked:not([value=""])) {
   .stat-value{
     font-size:24px;
   }
-
-/* filter row for admin inbound */
-
-  /* .filter-row {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  margin-top: 10px;
-  flex-direction: column;
-  gap: 10px;
-} */
 
   /* Scrap Grid*/
 
@@ -1360,8 +1336,61 @@ select.input:has(option:checked:not([value=""])) {
     gap: 5px; 
   }
 
+  .status-with-file-attachments-icon {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;       
+  }
+  .file-attachment-icon {
+    width: 22px;
+    height: 22px;
+  }
+  .FinanceTeam-card .scrap-left {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+.finance-team-bottom-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 10px;
+  }
+
+  .finance-team-bottom-row .approval-levels {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px 20px;
+  }
+
+  .finance-team-bottom-row .approval-user {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .finance-team-bottom-row .level-circle {
+  width: 20px;
+  height: 20px;
+  font-size: 11px;
 }
 
+  .finance-team-actions {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    justify-content: flex-end;
+  }
+
+  .finance-team-actions .btn-danger,
+  .finance-team-actions .MuiButton-root {
+    height: 30px;
+    padding: 0 12px;
+    font-size: 12px;
+  }
+
+}
 
 
 @media (max-width: 1024px) {

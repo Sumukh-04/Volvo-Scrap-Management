@@ -15,6 +15,7 @@ import {
 import Delete from "../../../assets/image-assets/bin_delete.png";
 import AppButton from "../../../Common/Components/UI/ButtonUI";
 import backArrow from "../../../assets/image-assets/Back_Arrow.png";
+import AlertModal from "../../../Common/Components/UI/AlertModal";
 import { useState, useEffect } from "react";
 
 type User = {
@@ -95,9 +96,17 @@ export default function UserManagement() {
       )
     );
   };
-
+  const [deleteId, setDeleteId] = useState<number | null>(null);
+  const [alertOpen, setAlertOpen] = useState(false);
   const handleDelete = (id: number) => {
     setUsers((prev) => prev.filter((user) => user.id !== id));
+  };
+  const confirmDelete = () => {
+    if (deleteId !== null) {
+      handleDelete(deleteId);
+    }
+    setAlertOpen(false);
+    setDeleteId(null);
   };
 
   const startIndex = (page - 1) * rowsPerPage;
@@ -265,7 +274,10 @@ export default function UserManagement() {
                 </TableCell>
 
                 <TableCell align="center">
-                  <IconButton onClick={() => handleDelete(user.id)}>
+                  <IconButton   onClick={() => {
+                        setDeleteId(user.id);
+                        setAlertOpen(true);
+                      }}>
                     <img
                       src={Delete}
                       alt="delete"
@@ -308,7 +320,15 @@ export default function UserManagement() {
     onChange={(e, value) => setPage(value)}
   />
 </Box>
-
+    <AlertModal
+      open={alertOpen}
+      onCancel={() => {
+        setAlertOpen(false);
+        setDeleteId(null);
+      }}
+      onConfirm={confirmDelete}
+      message="You are about to delete this user. Are you sure you want to continue?"
+    />
     </Box>
   );
 }

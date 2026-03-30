@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import ScrapCard, { ScrapItem } from "../../../Common/DashboardComponents/ScrapCard"
 import ScrapCardSkeleton from "../../../Common/Components/Skeleton/skeleton"
 import Pagination from "@mui/material/Pagination"
+import PopupWithTextarea from "../../../Common/Components/UI/PopupWithTextarea"
 
 type AdminInboundProps = {
   data: ScrapItem[]
@@ -17,6 +18,9 @@ export default function AdminInbound({
   emptyMessage = "No data available"
 }: AdminInboundProps) {
 
+
+  const [popupOpen, setPopupOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<ScrapItem | null>(null);
   const [page, setPage] = useState(1)
 
   const itemsPerPage = 12

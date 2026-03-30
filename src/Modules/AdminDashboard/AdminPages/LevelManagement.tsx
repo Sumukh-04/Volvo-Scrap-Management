@@ -9,8 +9,12 @@ import {
 import backArrow from "../../../assets/image-assets/Back_Arrow.png"
 import DeleteIcon from "../../../assets/image-assets/bin_delete.png"
 import AppButton from "../../../Common/Components/UI/ButtonUI";
+import AlertModal from "../../../Common/Components/UI/AlertModal";
+import { useState, useEffect } from "react";
 
 export default function LevelManagement() {
+  
+  const [alertOpen, setAlertOpen] = useState(false);
   return (
     <Box
       sx={{
@@ -88,7 +92,7 @@ export default function LevelManagement() {
               >
                 Add Sub-category
               </Typography>
-              <IconButton size="small">
+              <IconButton size="small" onClick={() => setAlertOpen(true)}>
                 <img
                       src={DeleteIcon}
                       alt="delete"
@@ -121,7 +125,7 @@ export default function LevelManagement() {
               >
                 Add Sub-category
               </Typography>
-              <IconButton size="small">
+              <IconButton size="small" onClick={() => setAlertOpen(true)}>
                 <img
                       src={DeleteIcon}
                       alt="delete"
@@ -154,7 +158,7 @@ export default function LevelManagement() {
                 >
                   Add Sub-category
                 </Typography>
-                <IconButton size="small">
+                <IconButton size="small" onClick={() => setAlertOpen(true)}>
                   <img
                       src={DeleteIcon}
                       alt="delete"
@@ -181,7 +185,7 @@ export default function LevelManagement() {
                   }}
                 >
                   <Typography variant="body2">{level}</Typography>
-                  <IconButton size="small">
+                  <IconButton size="small" onClick={() => setAlertOpen(true)}>
                     <img
                       src={DeleteIcon}
                       alt="delete"
@@ -198,6 +202,15 @@ export default function LevelManagement() {
           </Box>
         </Paper>
       </Box>
+      <AlertModal
+        open={alertOpen}
+        onCancel={() => setAlertOpen(false)}
+        onConfirm={() => {
+          console.log("Level deleted");
+          setAlertOpen(false);
+        }}
+        message="You are about to delete this level. Are you sure you want to continue?"
+      />
     </Box>
   );
 }
