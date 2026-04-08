@@ -7,14 +7,16 @@ import PopupWithTextarea from "../../../Common/Components/UI/PopupWithTextarea"
 type AdminInboundProps = {
   data: ScrapItem[]
   loading?: boolean
-  filter?: string
+  statusFilter?: string
+  scheduleFilter?:string
   emptyMessage?: string
 }
 
 export default function AdminInbound({
   data,
   loading = false,
-  filter = "all",
+  statusFilter = "all",
+  scheduleFilter = "all",
   emptyMessage = "No data available"
 }: AdminInboundProps) {
 
@@ -22,25 +24,65 @@ export default function AdminInbound({
   const [popupOpen, setPopupOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ScrapItem | null>(null);
   const [page, setPage] = useState(1)
-
+  const handleUnscheduleClick = (item: ScrapItem) => {
+  setSelectedItem(item);
+  setPopupOpen(true);
+  };
+  
   const itemsPerPage = 12
 
-  // 🔹 filter logic
-  const filteredData =
-    filter === "all"
-      ? data
-      : data.filter(
-          (item) =>
-            item.status.toLowerCase() === filter.toLowerCase()
-        )
+//filtering logic
+const normalizeDate = (date: Date) => {
+  const d = new Date(date);
+  d.setHours(0, 0, 0, 0);
+  return d;
+};
 
+const today = normalizeDate(new Date());
+const tomorrow = normalizeDate(new Date());
+tomorrow.setDate(tomorrow.getDate() + 1);
+
+//status filter approved,pending,etc
+let filteredData = data;
+
+if (statusFilter !== "all") {
+  filteredData = filteredData.filter(
+    (item) =>
+      item.status.toLowerCase().trim() ===
+      statusFilter.toLowerCase().trim()
+  );
+}
+
+//schedule silter today,tomorrow...etc
+if (scheduleFilter === "today") {
+  filteredData = filteredData.filter((item) => {
+    if (!item.scheduledDate) return false;
+    const itemDate = normalizeDate(new Date(item.scheduledDate));
+    return itemDate.getTime() === today.getTime();
+  });
+}
+
+if (scheduleFilter === "tomorrow") {
+  filteredData = filteredData.filter((item) => {
+    if (!item.scheduledDate) return false;
+    const itemDate = normalizeDate(new Date(item.scheduledDate));
+    return itemDate.getTime() === tomorrow.getTime();
+  });
+}
+
+if (scheduleFilter === "unscheduled") {
+  filteredData = filteredData.filter(
+    (item) => !item.scheduledDate
+  );
+}
   const startIndex = (page - 1) * itemsPerPage
   const paginatedData = filteredData.slice(startIndex, startIndex + itemsPerPage)
 
   // reset page when data or filter changes
   useEffect(() => {
     setPage(1)
-  }, [data, filter])
+  }, [data, statusFilter])
+
 
   return (
     <>
@@ -65,6 +107,7 @@ export default function AdminInbound({
               <ScrapCard
                 item={item}
                 mode="adminInbound"
+                onUnscheduleClick={handleUnscheduleClick}
               />
             </div>
           ))
@@ -87,6 +130,15 @@ export default function AdminInbound({
           />
         </div>
       )}
+      <PopupWithTextarea
+        open={popupOpen}
+        onClose={() => setPopupOpen(false)}
+        onConfirm={(reason) => {
+          console.log("Unschedule:", selectedItem?.id, reason);
+          setPopupOpen(false);
+        }}
+        message={`Do you want to unschedule Scrap ${selectedItem?.id}?`}
+      />
     </>
   )
 }

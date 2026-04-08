@@ -4,10 +4,16 @@ import FilterModal from "./FilterModal"
 import AppButton from "../Components/UI/ButtonUI"
 
 type FilterBarProps = {
-  mode?: "inbound" | "outbound" | "adminInbound"
+  mode?: "inbound" | "outbound" | "adminInbound" | "adminOutbound" 
+  onFilterChange?: (value: string) => void
+  counts?: {
+    today: number
+    tomorrow: number
+    unscheduled:number
+  }
 }
 
-export default function FilterBar({ mode = "inbound" }: FilterBarProps) {
+export default function FilterBar({ mode = "inbound",onFilterChange, counts }: FilterBarProps) {
 
   const isOutbound = mode === "outbound";
   const isAdminInbound = mode === "adminInbound";
@@ -35,7 +41,10 @@ export default function FilterBar({ mode = "inbound" }: FilterBarProps) {
           <AppButton
             className="admin-filter-btn"
             variant={activeTab === "All" ? "filled" : "outlined"}
-            onClick={() => setActiveTab("All")}
+            onClick={() => {
+              setActiveTab("All")
+              onFilterChange?.("all")
+            }}
           >
           <div className="scheduled-label">
             All
@@ -45,30 +54,39 @@ export default function FilterBar({ mode = "inbound" }: FilterBarProps) {
           <AppButton
             className="admin-filter-btn"
             variant={activeTab === "Today" ? "filled" : "outlined"}
-            onClick={() => setActiveTab("Today")}
+            onClick={() => {
+              setActiveTab("Today")
+              onFilterChange?.("today")
+            }}
           >
           <div className="scheduled-label">
-            Scheduled for today (15)
+            Scheduled for Today ({counts?.today ?? 0})
           </div>
           </AppButton>
 
           <AppButton
             className="admin-filter-btn"
             variant={activeTab === "Tomorrow" ? "filled" : "outlined"}
-            onClick={() => setActiveTab("Tomorrow")}
+            onClick={() => {
+              setActiveTab("Tomorrow")
+              onFilterChange?.("tomorrow")
+            }}
           >
           <div className="scheduled-label">
-            Scheduled for Tomorrow (10)
+            Scheduled for Tomorrow ({counts?.tomorrow ?? 0})
           </div>
           </AppButton>
 
           <AppButton
             className="admin-filter-btn"
             variant={activeTab === "Unscheduled" ? "filled" : "outlined"}
-            onClick={() => setActiveTab("Unscheduled")}
+            onClick={() => {
+            setActiveTab("Unscheduled")
+            onFilterChange?.("unscheduled")
+          }}
           >
           <div className="scheduled-label">
-            Unscheduled (6)
+            Unscheduled ({counts?.unscheduled ?? 0})
           </div>
           </AppButton>
         </div>

@@ -28,11 +28,11 @@ export default function PopupWithTextarea({
   const handleConfirm = () => {
     if (!reason.trim()) return;
     onConfirm(reason);
-    setReason(""); // reset after submit
+    setReason(""); 
   };
 
   const handleClose = () => {
-    setReason(""); // reset on close
+    setReason(""); 
     onClose();
   };
 
@@ -47,8 +47,8 @@ export default function PopupWithTextarea({
         <TextField
           fullWidth
           multiline
-          minRows={3}
-          placeholder="Enter reason..."
+          minRows={1}
+          placeholder="Enter reason for unscheduling..."
           value={reason}
           onChange={(e) => setReason(e.target.value)}
         />
@@ -57,14 +57,20 @@ export default function PopupWithTextarea({
       <DialogActions sx={{ px: 3, pb: 3 }}>
         <Box sx={{ display: "flex", gap: 2, ml: "auto" }}>
           
-          <AppButton variant="outlined" onClick={handleClose}>
+          <AppButton variant="outlined" onClick={handleClose} sx={{ height: "30px" }}>
             No
           </AppButton>
-
           <AppButton
             variant="filled"
             onClick={handleConfirm}
-            disabled={!reason.trim()}   // ✅ KEY REQUIREMENT
+            disabled={!reason.trim()}
+            sx={{ height: "30px",
+                  "&.Mui-disabled": {
+                  color: "#9ca3af",
+                  cursor: "not-allowed"
+                }
+            }}
+               
           >
             Yes
           </AppButton>

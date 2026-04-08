@@ -7,14 +7,14 @@ import Pagination from "@mui/material/Pagination";
 type AdminOutboundProps = {
   data: ScrapItem[];
   loading?: boolean;
-  filter?: string;
+  statusFilter?: string;
   emptyMessage?: string;
 };
 
 export default function AdminOutbound({
   data,
   loading = false,
-  filter = "all",
+  statusFilter = "all",
   emptyMessage = "No outbound scrap found",
 }: AdminOutboundProps) {
 
@@ -23,11 +23,11 @@ export default function AdminOutbound({
 
   // Filtering logic
   const filteredData =
-    filter === "all"
+    statusFilter === "all"
       ? data
       : data.filter(
           (item) =>
-            item.status.toLowerCase() === filter.toLowerCase()
+            item.status.toLowerCase() === statusFilter.toLowerCase()
         );
 
   const startIndex = (page - 1) * itemsPerPage;
@@ -35,7 +35,7 @@ export default function AdminOutbound({
 
   useEffect(() => {
     setPage(1);
-  }, [data, filter]);
+  }, [data, statusFilter]);
 
   return (
     <>
