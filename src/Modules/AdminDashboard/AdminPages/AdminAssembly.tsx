@@ -11,7 +11,12 @@ import SyncButton from "../../../Common/Components/UI/SyncButton"
 import ScrapCardSkeleton from "../../../Common/Components/Skeleton/skeleton"
 import { Pagination } from "@mui/material"
 
-const tabs = ["Assembly", "Inbound", "Outbound"]
+
+const dateContext=(days: number)=>{
+  const d=new Date();
+  d.setDate(d.getDate() + days);
+  return d.toISOString();
+};
 
 const mockData1: ScrapItem[] = Array.from({ length: 18 }, (_, i) => ({
   id: 155 + i * 2,
@@ -21,14 +26,18 @@ const mockData1: ScrapItem[] = Array.from({ length: 18 }, (_, i) => ({
   time: "12-01-2026 16:40:29",
 }))
 
-const mockData2: ScrapItem[] = Array.from({ length: 18 }, (_, i) => ({
+const mockData2: ScrapItem[] = Array.from({ length: 19 }, (_, i) => ({
   id: 155 + i * 2,
   type: "Aluminium",
   weight: `${80 + i * 3}kg`,
   status: "Approved",
   time: "12-01-2026 16:40:29",
-  scheduled: i % 2 === 0,
-}))
+  scheduledDate: i % 3 === 0
+    ? dateContext(0)   
+    : i % 3 === 1
+    ? dateContext(1)   
+    : undefined          
+  }));
 
 const mockData3: ScrapItem[] = Array.from({ length: 5 }, (_, i) => ({
   id: 155 + i * 2,
@@ -46,12 +55,41 @@ const mockData4: ScrapItem[] = Array.from({ length: 5 }, (_, i) => ({
   time: "12-01-2026 16:40:29",
 }))
 
+const normalizeDate = (date: Date) => {
+  const d = new Date(date)
+  d.setHours(0, 0, 0, 0)
+  return d
+}
+
+const today = normalizeDate(new Date())
+
+const tomorrow = normalizeDate(new Date())
+tomorrow.setDate(tomorrow.getDate() + 1)
+
+// Count for scrap items for admin inbound
+const counts = {
+  today: mockData2.filter(item => {
+    if (!item.scheduledDate) return false
+    const itemDate = normalizeDate(new Date(item.scheduledDate))
+    return itemDate.getTime() === today.getTime()
+  }).length,
+
+  tomorrow: mockData2.filter(item => {
+    if (!item.scheduledDate) return false
+    const itemDate = normalizeDate(new Date(item.scheduledDate))
+    return itemDate.getTime() === tomorrow.getTime()
+  }).length,
+
+  unscheduled: mockData2.filter(item => !item.scheduledDate).length
+}
+
 export default function AdminAssembly() {
 
   const [activeTab, setActiveTab] = useState("Assembly")
   const [loading, setLoading] = useState(true)
 
-  const [filter, setFilter] = useState("all")
+  const [statusFilter, setStatusFilter] = useState("all")
+  const [scheduleFilter, setScheduleFilter] = useState("all")
 
   // pagination state
   const [page, setPage] = useState(1)
@@ -105,20 +143,23 @@ export default function AdminAssembly() {
      {activeTab === "Inbound" && (
         <StatsRow
           variant="adminInbound"
-          onFilterChange={setFilter}
-           data={mockData2}
+          onFilterChange={setStatusFilter}
+          data={mockData2}
         />
       )}
 
       {activeTab === "Outbound" && (
       <StatsRow
         variant="adminOutbound"
-        onFilterChange={setFilter}
+        onFilterChange={setStatusFilter}
         data={[...mockData1, ...mockData2, ...mockData3, ...mockData4]}
       />
     )}
 
-      <FilterBar mode={getFilterMode()} />
+      <FilterBar 
+      mode={getFilterMode()} 
+      onFilterChange={setScheduleFilter} 
+      counts={counts}/>
     </>
   )
 
@@ -162,7 +203,8 @@ export default function AdminAssembly() {
             <AdminInbound
               data={mockData2}
               loading={loading}
-              filter={filter}
+              statusFilter={statusFilter}
+              scheduleFilter={scheduleFilter}
               emptyMessage="No inbound scrap found"
             />
           )}
@@ -171,7 +213,7 @@ export default function AdminAssembly() {
         <AdminOutbound
           data={[...mockData1, ...mockData2, ...mockData3, ...mockData4]}
           loading={loading}
-          filter={filter}
+          statusFilter={statusFilter}
           emptyMessage="No outbound scrap found"
         />
       )}

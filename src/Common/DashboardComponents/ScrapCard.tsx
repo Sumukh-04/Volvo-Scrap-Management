@@ -39,13 +39,14 @@ export type ScrapItem = {
   approval?: string;
   note?: string;
   icon?: string;
-  scheduled?: boolean; // new parameter for defining which cards are scheduled and which are not in admin inbound
+  scheduledDate?: string; //  parameter for defining which cards are scheduled and which are not in admin inbound
 };
 
 type ScrapCardProps = {
   item: ScrapItem;
   mode?: ScrapMode;
   onClick?: (item: ScrapItem) => void;
+  onUnscheduleClick?: (item: ScrapItem) => void;
 };
 
 /* -------------------- COMPONENT -------------------- */
@@ -54,6 +55,7 @@ export default function ScrapCard({
   item,
   mode = "inbound",
   onClick,
+  onUnscheduleClick,
 }: ScrapCardProps) {
   // Better CSS class formatting
   const statusClass = item.status
@@ -87,12 +89,12 @@ const normalizedStatus = item.status?.trim().toLowerCase();
       onClick?.(item);
     }
   };
-// new stuff history drawer
+// history drawer
   const [historyOpen, setHistoryOpen] = useState(false)
 //Confirm Action Dialog
     const [confirmOpen, setConfirmOpen] = useState(false)
-    const [confirmAction, setConfirmAction] = useState<"Approve" | "Reject" | "Schedule" | null>(null)
-    const openConfirm = (action: "Approve" | "Reject" | "Schedule") => {
+    const [confirmAction, setConfirmAction] = useState<"Approve" | "Reject" | "Schedule" | "Reopen" | null>(null)
+    const openConfirm = (action: "Approve" | "Reject" | "Schedule" | "Reopen") => {
     setConfirmAction(action)
     setConfirmOpen(true)
   }
@@ -168,7 +170,6 @@ const normalizedStatus = item.status?.trim().toLowerCase();
           </div>
         </div>
 
-        {/* <StatusBadge status={item.status} />  existing before history icon implemented */}
 
 {/* this is to implement history icon in admin inbound....the history icon should show in the admin assembly as well, 
     but since te admin assembly is conditionally rendered using outbound scrap card, couldnt implement the history icon in admin assembly*/}
@@ -225,16 +226,45 @@ const normalizedStatus = item.status?.trim().toLowerCase();
 
       {mode === "adminInbound" && (
         <div className="card-actions">
-          {item.scheduled ? (
-            <div className="scheduled-text">
-                Scheduled for Today
-              <img
-                src={calendarIcon}
-                alt="calendar"
-                className="scheduled-icon"
-              />
-            </div>
-          ) : (
+
+          {item.scheduledDate ? (() => {
+            const today = new Date();
+            const scheduled = new Date(item.scheduledDate);
+
+            const isSameDay = (
+              d1: Date,
+              d2: Date
+            ) =>
+              d1.getFullYear() === d2.getFullYear() &&
+              d1.getMonth() === d2.getMonth() &&
+              d1.getDate() === d2.getDate();
+
+            const tomorrow = new Date();
+            tomorrow.setDate(today.getDate() + 1);
+
+            let label = "Scheduled";
+
+            if (isSameDay(scheduled, today)) {
+              label = "Scheduled for Today";
+            } else if (isSameDay(scheduled, tomorrow)) {
+              label = "Scheduled for Tomorrow";
+            }
+
+            return (
+              <div
+                className="scheduled-text"
+                onClick={() => onUnscheduleClick?.(item)}
+                style={{ cursor: "pointer" }}
+              >
+                {label}
+                <img
+                  src={calendarIcon}
+                  alt="calendar"
+                  className="scheduled-icon"
+                />
+              </div>
+            );
+          })() : (
             <AppButton
               variant="filled"
               sx={{
