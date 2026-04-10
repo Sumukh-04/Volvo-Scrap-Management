@@ -21,7 +21,7 @@ export default function AdminOutbound({
   const [page, setPage] = useState(1);
   const itemsPerPage = 6;
 
-  // 🔹 Filtering logic
+  // Filtering logic
   const filteredData =
     statusFilter === "all"
       ? data
