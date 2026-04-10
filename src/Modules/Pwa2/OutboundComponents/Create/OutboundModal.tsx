@@ -11,6 +11,7 @@ import {
 import { ScrapItem } from "../../../../Common/DashboardComponents/ScrapCard";
 import stat from "../../../../assets/image-assets/stat-image.png";
 import AppButton from "../../../../Common/Components/UI/ButtonUI";
+import camera from "../../../../assets/image-assets/camera-icon.png"
 
 type Props = {
   open: boolean;
@@ -50,25 +51,72 @@ export default function OutboundModal({
     }}
   >
     {/* LEFT SIDE — IMAGE */}
+
+  <Box
+    sx={{
+      flex: 1,
+      padding: "10px",
+      position: "relative", 
+      display: "flex",
+    }}
+  >
+    
     <Box
+      component="img"
+      src={stat}
+      alt="scrap"
       sx={{
-        flex: 1,
-        padding:"10px",
-        display: "flex",
-        alignItems: "stretch",
+        width: "100%",
+        height: "95%",
+        objectFit: "cover",
+        borderRadius: "6px",
       }}
-    >
+    />
+
       <Box
-        component="img"
-        src={stat}
-        alt="scrap"
         sx={{
-          width: "100%",
-          height:"95%",
-          objectFit: "cover",
+          position: "absolute",
+          bottom: 45,
+          left: 80,
+          display: "flex",
+          alignItems: "center",
+          gap: 25,
         }}
-      />
+      >
+
+      <Box
+        sx={{
+          width: 29,
+          height: 29,
+          background: "#fff",
+          borderRadius: "2px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+          cursor: "pointer",
+        }}
+      >
+        <img src={camera} alt="camera" style={{ width: 20 }} />
+      </Box>
+
+      <Box
+        component="label"
+        sx={{
+          background: "#fff",
+          px: 1.5,
+          py: 0.8,
+          borderRadius: "2px",
+          fontSize: "13px",
+          cursor: "pointer",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+        }}
+      >
+        Choose File
+        <input type="file" hidden />
+      </Box>
     </Box>
+  </Box> 
 
     {/* RIGHT SIDE — FORM */}
     <Box

@@ -3,7 +3,6 @@ import AppLayout from "../../../layouts/AppLayout"
 import ScrapCard, { ScrapItem } from "../../../Common/DashboardComponents/ScrapCard"
 import FilterBar from "../../../Common/DashboardComponents/Filterbar"
 import AssemblyNavigationTabs from "../../../Common/Components/UI/AssemblyNavigationTabs"
-import "../../../styles/style.css"
 import AdminInbound from "./AdminInbound"
 import AdminOutbound from "./AdminOutbound"
 import StatsRow from "../../../Common/DashboardComponents/StatsRow"
@@ -15,7 +14,7 @@ import { Pagination } from "@mui/material"
 const dateContext=(days: number)=>{
   const d=new Date();
   d.setDate(d.getDate() + days);
-  return d.toISOString();
+  return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
 };
 
 const mockData1: ScrapItem[] = Array.from({ length: 18 }, (_, i) => ({

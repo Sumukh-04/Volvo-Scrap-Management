@@ -1,5 +1,6 @@
 import { Drawer } from "@mui/material"
 import closeIcon from "../../../assets/image-assets/close_icon.png"
+import fileExport from "../../../assets/image-assets/FileExport.svg"
 
 type HistoryItem = {
   title: string
@@ -45,7 +46,13 @@ export default function HistoryDrawer({
       {/* Scrap Title*/}
       <div className="history-subheader">
         <div className="history-scrap-title">{scrapTitle}</div>
-        <div className="history-export">Export log</div>
+        <div className="history-export">
+          <img
+            src={fileExport}
+            alt="fileExport"
+            className="history-export-icon"
+          /> 
+           Export log</div>
       </div>
           <div className="history-timeline">
 

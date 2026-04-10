@@ -43,19 +43,19 @@ export default function StatsRow({
 
   const adminOutboundStats = [
     { label: "All Scrap",  type: "all" },
-    { label: "Approved",  type: "approved" },
     { label: "Pending",  type: "pending" },
     { label: "Rejected",  type: "rejected" },
-    { label: "Finance Pending",  type: "pending by finance team" },
-    { label: "Challan Generated",  type: "challan generated" },
+    { label: "Finance Pending",  type: "pending by finance team" }, 
+    { label: "Approved",  type: "approved" },
+    { label: "Challan Generated",  type: "challan generated" }
   ];
 
   const outboundStats = [
-    { label: "All Scrap", value: 24, type: "all" }, 
+    { label: "All Scrap", type: "all" }, 
     { label: "Pending",  type: "pending" },
+    { label: "Resubmitted",  type: "resubmitted" },
     { label: "Draft",  type: "draft" },
-    { label: "Sent For Approval",  type: "sent for approval" },
-    { label: "Resubmitted",  type: "resubmitted" } 
+    { label: "Sent For Approval",  type: "sent for approval" }
   ];
 
   const l1l2l3Stats = [

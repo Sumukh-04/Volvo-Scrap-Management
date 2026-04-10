@@ -407,7 +407,10 @@ select.input:has(option:checked:not([value=""])) {
   color: var(--overdue-text);
 }
 .stat-card.sent.for.approval .stat-value {
-  color: #489844;
+  color: var(--approved-text);
+}
+.stat-card.draft .stat-value {
+  color: #4B63A2;
 }
 .stat-card.active .stat-value{
   color: #ffc107 !important;
@@ -637,7 +640,7 @@ select.input:has(option:checked:not([value=""])) {
 }
 .status-draft{
   background: #e2e8f5;
-  color: #4d5b80;
+  color: #4D5B80;
 }
 
 .status-challan.generated{
@@ -1124,6 +1127,16 @@ select.input:has(option:checked:not([value=""])) {
   padding-top: 10px;
   font-size: 14px;
   font-weight: 400;
+  text-decoration: underline;
+  display: flex;
+  align-items: center;
+  gap:4px;
+  cursor:pointer;
+}
+
+.history-export-icon{
+  height: 12px;
+  width: 12px;
 }
 
 .history-timeline{

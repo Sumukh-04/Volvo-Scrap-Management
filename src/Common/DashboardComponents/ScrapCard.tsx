@@ -242,12 +242,22 @@ const normalizedStatus = item.status?.trim().toLowerCase();
             const tomorrow = new Date();
             tomorrow.setDate(today.getDate() + 1);
 
+            const formatDate = (date: Date) => {
+              return date.toLocaleDateString("en-GB", {
+                day: "2-digit",
+                month: "short",
+                year: "numeric",
+              });
+            };
+
             let label = "Scheduled";
 
             if (isSameDay(scheduled, today)) {
-              label = "Scheduled for Today";
+              label = `Scheduled for Today (${formatDate(scheduled)})`;
             } else if (isSameDay(scheduled, tomorrow)) {
-              label = "Scheduled for Tomorrow";
+              label = `Scheduled for Tomorrow (${formatDate(scheduled)})`;
+            } else {
+              label = `Scheduled (${formatDate(scheduled)})`;
             }
 
             return (
